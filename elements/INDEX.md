@@ -13,16 +13,20 @@ Curves appear only where the curve IS the shape: circle, ring, heart, arc, spark
 
 ## Backgrounds (`backgrounds/`, 1080 × 1920)
 
-| file | gradient |
-|---|---|
-| `bg-navy.svg` | `#080A1A → #141B3D` |
-| `bg-indigo.svg` | `#1E1B4B → #312E81` |
-| `bg-teal.svg` | `#062A2E → #0B4B50` |
-| `bg-plum.svg` | `#2A1530 → #4A1D4D` |
-| `bg-cream.svg` | `#FFF6E5 → #FDEED3` |
-| `bg-cream-emerald.svg` | `#E0F8E8 → #94DEAF` |
-| `bg-emerald.svg` | `#40BD7E → #168654` |
-| `bg-emerald-light.svg` | `#94DEAF → #40BD7E` |
+Flat solid colour, plus a small tone-on-tone `?` pattern (Kai,
+2026-11-10 — after 皆謎's tone-on-tone walking-person pattern). The
+pattern shows only in the bands; the riddle square covers the middle.
+
+| file | fill | pattern |
+|---|---|---|
+| `bg-navy.svg` | `#080A1A` | `#141B3D` at 40% |
+| `bg-indigo.svg` | `#1E1B4B` | `#312E81` at 40% |
+| `bg-teal.svg` | `#062A2E` | `#0B4B50` at 40% |
+| `bg-plum.svg` | `#2A1530` | `#4A1D4D` at 40% |
+| `bg-cream.svg` | `#FFF6E5` | `#FDEED3` at 40% |
+| `bg-cream-emerald.svg` | `#E0F8E8` | `#94DEAF` at 40% |
+| `bg-emerald.svg` | `#168654` | `#0D5038` at 40% |
+| `bg-emerald-light.svg` | `#40BD7E` | `#168654` at 40% |
 
 ## Empty riddle squares (`squares/`, 984 × 984, sharp corners, transparent outside)
 

@@ -15,7 +15,7 @@ rectangles, no rounded joins. Curves appear only where the curve IS the shape
 (circle, ring, heart, arc, sparkle).
 
 Outputs under ~/workspace/single-image-riddle/elements/:
-  backgrounds/  bg-<name>.svg        1080 x 1920, plain gradient, one per colour
+  backgrounds/  bg-<name>.svg        1080 x 1920, flat solid + tone-on-tone "?" pattern
   squares/      square-<name>.svg    984 x 984 empty riddle square, sharp corners
   squares/      square-<name>-1080.svg  1080 x 1080 full-width riddle square
   shapes/       <shape>-<colour>-<size>.svg   sizes s=120, m=240, l=480 (transparent bg)
@@ -56,15 +56,16 @@ COLORS = {
 }
 THEME = "emerald"  # anchor #40BD7E
 
-BACKGROUNDS = [  # name, top, bottom
+BACKGROUNDS = [  # name, flat fill, tone-on-tone pattern colour (Kai, 2026-11-10)
     ("navy",   "#080A1A", "#141B3D"),
     ("indigo", "#1E1B4B", "#312E81"),
     ("teal",   "#062A2E", "#0B4B50"),
     ("plum",   "#2A1530", "#4A1D4D"),
     ("cream",  "#FFF6E5", "#FDEED3"),
     ("cream-emerald", "#E0F8E8", "#94DEAF"),  # theme ramp, pale end
-    ("emerald", "#40BD7E", "#168654"),       # theme colour
-    ("emerald-light", "#94DEAF", "#40BD7E"), # one tint brighter — the page
+    ("emerald", "#168654", "#0D5038"),         # dark step — keeps it distinct
+                                              # from emerald-light (see below)
+    ("emerald-light", "#40BD7E", "#168654"),   # the theme anchor — the page
                                               # background (Kai, 2026-11-07)
 ]
 
@@ -121,13 +122,47 @@ def write(path, content):
 
 counts = {}
 
-# ---- backgrounds: 1080 x 1920 gradients ----
-for name, top, bottom in BACKGROUNDS:
+# ---- backgrounds: 1080 x 1920, FLAT solid colour + small tone-on-tone pattern ----
+# Kai, 2026-11-10: the gradient was the assistant's invention — nobody asked
+# for it, and it contradicts the flat-fill language (皆謎 uses flat fills; the
+# riddle square is a flat colour plate). So: one solid colour, plus a small
+# repeating pattern like 皆謎's tone-on-tone walking people — flat, but not
+# boring. The motif is a small "?" (the riddle's own symbol), staggered in a
+# brick layout (240 x 240 tile, "?" at (60,60) and (180,180)), in the next
+# ramp step at 40% opacity. It shows only in the bands — the riddle square
+# covers the middle, the way 皆謎's pattern lives in the sidebar, not the
+# content area.
+_font = TTFont("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
+_glyphset = _font.getGlyphSet()
+
+def _qmark_transform(target_h):
+    """Scale/centre for the '?' glyph at target_h px tall, centred at (0,0)."""
+    glyph = _glyphset["question"]
+    bpen = BoundsPen(_glyphset)
+    glyph.draw(bpen)
+    x0, y0, x1, y1 = bpen.bounds
+    cx, cy, h = (x0 + x1) / 2, (y0 + y1) / 2, y1 - y0
+    spen = SVGPathPen(_glyphset)
+    glyph.draw(spen)
+    d = spen.getCommands()
+    k = target_h / h
+    return d, k, cx, cy
+
+_QD, _QK, _QCX, _QCY = _qmark_transform(28)
+
+def _pattern_def(pat):
+    q = (f'<path d="{_QD}" fill="{pat}" fill-opacity="0.4" '
+         f'transform="translate(60,60) scale({_QK:.4f},{-_QK:.4f}) '
+         f'translate({-_QCX:.1f},{-_QCY:.1f})"/>')
+    q2 = q.replace("translate(60,60)", "translate(180,180)")
+    return (f'<defs><pattern id="pat" width="240" height="240" '
+            f'patternUnits="userSpaceOnUse">{q}{q2}</pattern></defs>')
+
+for name, fill, pat in BACKGROUNDS:
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">'
-           f'<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">'
-           f'<stop offset="0" stop-color="{top}"/><stop offset="1" stop-color="{bottom}"/>'
-           f'</linearGradient></defs>'
-           f'<rect width="1080" height="1920" fill="url(#bg)"/></svg>')
+           + _pattern_def(pat)
+           + f'<rect width="1080" height="1920" fill="{fill}"/>'
+           + f'<rect width="1080" height="1920" fill="url(#pat)"/></svg>')
     write(os.path.join(HERE, "backgrounds", f"bg-{name}.svg"), svg)
 counts["backgrounds"] = len(BACKGROUNDS)
 
@@ -172,9 +207,6 @@ DIGIT_COLORS = {
 }
 DIGIT_NAMES = ["zero", "one", "two", "three", "four",
                "five", "six", "seven", "eight", "nine"]
-
-_font = TTFont("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
-_glyphset = _font.getGlyphSet()
 
 def digit_body(glyph_name):
     """SVG path body for one digit, 68 units tall, centred in the 100 box."""
@@ -279,10 +311,14 @@ lines = ["# Elements — individual SVGs for image editors",
          "",
          "## Backgrounds (`backgrounds/`, 1080 × 1920)",
          "",
-         "| file | gradient |",
-         "|---|---|"]
-for name, top, bottom in BACKGROUNDS:
-    lines.append(f"| `bg-{name}.svg` | `{top} → {bottom}` |")
+         "Flat solid colour, plus a small tone-on-tone `?` pattern (Kai,",
+         "2026-11-10 — after 皆謎's tone-on-tone walking-person pattern). The",
+         "pattern shows only in the bands; the riddle square covers the middle.",
+         "",
+         "| file | fill | pattern |",
+         "|---|---|---|"]
+for name, fill, pat in BACKGROUNDS:
+    lines.append(f"| `bg-{name}.svg` | `{fill}` | `{pat}` at 40% |")
 lines += ["",
           "## Empty riddle squares (`squares/`, 984 × 984, sharp corners, transparent outside)",
           "",

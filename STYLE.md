@@ -70,9 +70,18 @@ meet the beam and the heads exactly, and the curved arrow's head sits on the cur
 5. Every riddle page is assembled from library elements only — if a page needs a new shape,
    add it to `elements.svg` first, then use it.
 
-## Frame & background (Kai, 2026-11-07 — formalized design, supersedes the 984 frame)
-- Background: one tint brighter than the old emerald — **emerald-light**
-  `#94DEAF → #40BD7E` (element `bg-emerald-light.svg`).
+## Frame & background (Kai, 2026-11-07 — formalized design, supersedes the 984 frame;
+flat + patterned, Kai 2026-11-10)
+- Background: **emerald-light**, flat solid `#40BD7E` (element
+  `bg-emerald-light.svg`).
+- The background is **flat, never a gradient** (Kai, 2026-11-10 — the gradient
+  was the assistant's invention; the style already said "flat fills, no
+  gradients"). It carries a small tone-on-tone pattern instead, after 皆謎's
+  tone-on-tone walking-person pattern in its sidebar: a small `?` (the
+  riddle's own symbol), staggered, in the next ramp step at 40% opacity.
+  Flat, but not boring. The pattern shows only in the bands — the riddle
+  square covers the middle, the way 皆謎's pattern lives in the sidebar,
+  not the content area.
 - The riddle square is the **brightest emerald tint** in the elements,
   `#E0F8E8` (element `square-emerald-pale-1080.svg`), and it is **as wide as
   the background — 1080 × 1080, no side margins**. TikTok canvas 1080 × 1920:
@@ -82,10 +91,10 @@ meet the beam and the heads exactly, and the curved arrow's head sits on the cur
   is what the eye reads.
 - For other ratios (16:9, 4:5, 1:1) the same square recentres and the bands shrink;
   the square never crops.
-- Background palette (top → bottom gradient) is unchanged otherwise:
-  **Navy** `#080A1A → #141B3D` (default), **Indigo** `#1E1B4B → #312E81`,
-  **Teal** `#062A2E → #0B4B50`, **Plum** `#2A1530 → #4A1D4D`,
-  **Cream** `#FFF6E5 → #FDEED3` (light option; panel white, ink dots).
+- Background palette (flat solid + tone-on-tone `?` pattern): **Navy**
+  `#080A1A`, **Indigo** `#1E1B4B`, **Teal** `#062A2E`, **Plum** `#2A1530`,
+  **Cream** `#FFF6E5` (light option), **Cream-emerald** `#E0F8E8`,
+  **Emerald** `#168654`, **Emerald-light** `#40BD7E`.
 
 ## Top / bottom bands — the series template (Kai, 2026-11-07; after 皆謎 / 一枚謎)
 The bands carry the fixed series elements, the way 皆謎's sidebar does
