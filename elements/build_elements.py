@@ -18,7 +18,6 @@ Outputs under ~/workspace/single-image-riddle/elements/:
   backgrounds/  bg-<name>.svg        1080 x 1920, flat solid (plain)
   backgrounds/  bg-<name>-patterned.svg  1080 x 1920, flat solid + key tessellation
   motifs/       motif-key.svg        100 x 100, the key motif (emerald-deep)
-  squares/      square-<name>.svg    984 x 984 empty riddle square, sharp corners
   squares/      square-<name>-1080.svg  1080 x 1080 full-width riddle square
   shapes/       <shape>-<colour>-<size>.svg   sizes s=120, m=240, l=480 (transparent bg)
   digits/       digit-<d>-<colour>-<size>.svg  digits 0-9 as paths, same 3 sizes
@@ -76,23 +75,10 @@ BACKGROUNDS = [  # name, flat fill, tone-on-tone pattern colour
                                               # background (Kai, 2026-11-07)
 ]
 
-# empty riddle square: name, panel fill — SHARP corners (rx 0), NO outline
-# (Kai, 2026-11-10: remove the outline — a square is only a colour plate,
-# like the full-width one.)
-SQUARES = [
-    ("navy",   "#0E1330"),
-    ("indigo", "#232052"),
-    ("teal",   "#0A3338"),
-    ("plum",   "#331A3A"),
-    ("cream",  "#FFFFFF"),
-    ("paper",  "#FFF6E5"),
-    ("ink",    "#101828"),
-    ("emerald", "#40BD7E"),
-    ("cream-emerald", "#E0F8E8"),
-]
-
 # full-width riddle square (Kai, 2026-11-07): as wide as the background,
-# no margins — 1080 x 1080, panel is the brightest emerald tint
+# no margins — 1080 x 1080, panel is the brightest emerald tint.
+# This is the ONLY square kept (Kai, 2026-11-10: the 984 x 984 squares
+# are not needed — only keep full width).
 SQUARES_FULL = [
     ("emerald-pale", "#E0F8E8", COLORS["emerald-deep"]),
 ]
@@ -201,14 +187,6 @@ write(os.path.join(HERE, "motifs", "motif-key.svg"), _motif_svg(COLORS["emerald-
 for name, fill, pat in BACKGROUNDS:
     write(os.path.join(HERE, "motifs", f"motif-key-{name}.svg"), _motif_svg(pat))
 counts["motifs"] = 1 + len(BACKGROUNDS)
-
-# ---- empty riddle squares: 984 x 984, sharp corners, transparent outside ----
-# Flat colour plate, NO outline (Kai, 2026-11-10).
-for name, fill in SQUARES:
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="984" height="984" viewBox="0 0 984 984">'
-           f'<rect x="0" y="0" width="984" height="984" fill="{fill}"/></svg>')
-    write(os.path.join(HERE, "squares", f"square-{name}.svg"), svg)
-counts["squares"] = len(SQUARES)
 
 # ---- full-width riddle square: 1080 x 1080, flat colour plate, NO outline ----
 # (Kai, 2026-11-07: remove the outline — the square is only a colour plate.)
@@ -380,15 +358,6 @@ lines += ["",
 for name, fill, pat in BACKGROUNDS:
     lines.append(f"| `motif-key-{name}.svg` | `{pat}` | `bg-{name}` (`{fill}`) |")
 lines += ["",
-          "## Empty riddle squares (`squares/`, 984 × 984, sharp corners, transparent outside)",
-          "",
-          "Flat colour plate, no outline (Kai, 2026-11-10).",
-          "",
-          "| file | panel |",
-          "|---|---|"]
-for name, fill in SQUARES:
-    lines.append(f"| `square-{name}.svg` | `{fill}` |")
-lines += ["",
           "## Full-width riddle square (`squares/`, 1080 × 1080, sharp corners)",
           "",
           "The riddle square (Kai, 2026-11-07): as wide as the background, no",
@@ -438,7 +407,7 @@ lines += ["",
           "",
           f"Counts: {counts['backgrounds']} backgrounds "
           f"({len(BACKGROUNDS)} plain + {len(BACKGROUNDS)} patterned), "
-          f"{counts['motifs']} key motifs, {counts['squares']} squares, "
+          f"{counts['motifs']} key motifs, "
           f"{counts['squares_full']} full-width riddle square, "
           f"{counts['shapes']} shapes "
           f"({len(SHAPES)} shapes × {len(COLORS)} colours × {len(SIZES)} sizes), "

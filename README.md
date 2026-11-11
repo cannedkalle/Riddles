@@ -18,8 +18,8 @@ crafted from. No riddles are stored here; only the elements.
     emerald-deep) plus one tint per background, `motif-key-<name>.svg`,
     in that background's pattern colour (only slightly darker/lighter
     than the fill).
-  - `squares/` — empty riddle squares: 9 at 984 × 984, plus the
-    full-width 1080 × 1080 plate.
+  - `squares/` — the full-width 1080 × 1080 riddle-square plate
+    (the 984 × 984 squares were removed, Kai 2026-11-10).
   - `shapes/` — 507 shapes (13 shapes × 13 colours × 3 sizes).
   - `digits/` — 210 digits (0–9 × 7 colours × 3 sizes), drawn as
     outlines so they need no font.

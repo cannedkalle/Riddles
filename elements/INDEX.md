@@ -65,22 +65,6 @@ fill — Kai, 2026-11-10), plus the default in emerald-deep.
 | `motif-key-emerald.svg` | `#126C44` | `bg-emerald` (`#168654`) |
 | `motif-key-emerald-light.svg` | `#38A66F` | `bg-emerald-light` (`#40BD7E`) |
 
-## Empty riddle squares (`squares/`, 984 × 984, sharp corners, transparent outside)
-
-Flat colour plate, no outline (Kai, 2026-11-10).
-
-| file | panel |
-|---|---|
-| `square-navy.svg` | `#0E1330` |
-| `square-indigo.svg` | `#232052` |
-| `square-teal.svg` | `#0A3338` |
-| `square-plum.svg` | `#331A3A` |
-| `square-cream.svg` | `#FFFFFF` |
-| `square-paper.svg` | `#FFF6E5` |
-| `square-ink.svg` | `#101828` |
-| `square-emerald.svg` | `#40BD7E` |
-| `square-cream-emerald.svg` | `#E0F8E8` |
-
 ## Full-width riddle square (`squares/`, 1080 × 1080, sharp corners)
 
 The riddle square (Kai, 2026-11-07): as wide as the background, no
@@ -138,4 +122,4 @@ alignment), then remove it for the final. Minor lines every 30 px,
 major lines every 90 px (the 12-column grid), riddle-square boundary
 (y 420–1500) emphasized. Emerald-deep `#0D5038`, low opacity.
 
-Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 9 squares, 1 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 210 digits (10 digits × 7 colours × 3 sizes), 3 question indicators, 1 layout grid.
+Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 1 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 210 digits (10 digits × 7 colours × 3 sizes), 3 question indicators, 1 layout grid.
