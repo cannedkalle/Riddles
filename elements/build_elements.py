@@ -75,12 +75,27 @@ BACKGROUNDS = [  # name, flat fill, tone-on-tone pattern colour
                                               # background (Kai, 2026-11-07)
 ]
 
-# full-width riddle square (Kai, 2026-11-07): as wide as the background,
-# no margins — 1080 x 1080, panel is the brightest emerald tint.
-# This is the ONLY square kept (Kai, 2026-11-10: the 984 x 984 squares
-# are not needed — only keep full width).
+# full-width riddle squares (Kai, 2026-11-07): as wide as the background,
+# no margins — 1080 x 1080, flat colour plates, NO outline.
+# This is the ONLY square size kept (Kai, 2026-11-10: the 984 x 984 squares
+# are not needed — only keep full width). One per background fill, plus
+# white and a very light emerald (Kai, 2026-11-10). Note cream and paper
+# are the same hex (#FFF6E5) in the current palette — both names are kept
+# so the file can be picked by either name.
+# Very light emerald #EEFBF3: same hue/saturation as #E0F8E8, lightness
+# 92.5% -> 96%, so it reads as a paler emerald, not white.
 SQUARES_FULL = [
+    ("navy", "#080A1A", COLORS["emerald-deep"]),
+    ("indigo", "#1E1B4B", COLORS["emerald-deep"]),
+    ("teal", "#062A2E", COLORS["emerald-deep"]),
+    ("plum", "#2A1530", COLORS["emerald-deep"]),
+    ("cream", "#FFF6E5", COLORS["emerald-deep"]),
+    ("paper", "#FFF6E5", COLORS["emerald-deep"]),
+    ("white", "#FFFFFF", COLORS["emerald-deep"]),
+    ("emerald", "#168654", COLORS["emerald-deep"]),
+    ("emerald-light", "#40BD7E", COLORS["emerald-deep"]),
     ("emerald-pale", "#E0F8E8", COLORS["emerald-deep"]),
+    ("emerald-palest", "#EEFBF3", COLORS["emerald-deep"]),
 ]
 
 SIZES = {"s": 120, "m": 240, "l": 480}

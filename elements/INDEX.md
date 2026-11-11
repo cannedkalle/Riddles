@@ -73,7 +73,17 @@ no outline (Kai, 2026-11-07).
 
 | file | panel |
 |---|---|
+| `square-navy-1080.svg` | `#080A1A` |
+| `square-indigo-1080.svg` | `#1E1B4B` |
+| `square-teal-1080.svg` | `#062A2E` |
+| `square-plum-1080.svg` | `#2A1530` |
+| `square-cream-1080.svg` | `#FFF6E5` |
+| `square-paper-1080.svg` | `#FFF6E5` |
+| `square-white-1080.svg` | `#FFFFFF` |
+| `square-emerald-1080.svg` | `#168654` |
+| `square-emerald-light-1080.svg` | `#40BD7E` |
 | `square-emerald-pale-1080.svg` | `#E0F8E8` |
+| `square-emerald-palest-1080.svg` | `#EEFBF3` |
 
 ## Shapes (`shapes/`, transparent background)
 
@@ -122,4 +132,4 @@ alignment), then remove it for the final. Minor lines every 30 px,
 major lines every 90 px (the 12-column grid), riddle-square boundary
 (y 420–1500) emphasized. Emerald-deep `#0D5038`, low opacity.
 
-Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 1 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 210 digits (10 digits × 7 colours × 3 sizes), 3 question indicators, 1 layout grid.
+Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 11 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 210 digits (10 digits × 7 colours × 3 sizes), 3 question indicators, 1 layout grid.
