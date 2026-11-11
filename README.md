@@ -9,7 +9,11 @@ crafted from. No riddles are stored here; only the elements.
 - `elements/` — the library. Every file is a standalone SVG (no `<use>`,
   no CSS variables), so it opens directly in Figma, Illustrator or
   Inkscape.
-  - `backgrounds/` — 8 full-page gradients, 1080 × 1920.
+  - `backgrounds/` — 16 full-page backgrounds, 1080 × 1920: 8 plain
+    (flat solid colour) + 8 patterned (flat solid + tone-on-tone key
+    tessellation, a basketweave of 1×2 rectangles rotated 23.1°).
+  - `motifs/` — `motif-key.svg`, the key motif behind the patterned
+    backgrounds (bow of 3 small solid circles, shaft, 2 teeth).
   - `squares/` — empty riddle squares: 9 at 984 × 984, plus the
     full-width 1080 × 1080 plate.
   - `shapes/` — 507 shapes (13 shapes × 13 colours × 3 sizes).

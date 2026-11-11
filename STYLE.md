@@ -73,15 +73,20 @@ meet the beam and the heads exactly, and the curved arrow's head sits on the cur
 ## Frame & background (Kai, 2026-11-07 — formalized design, supersedes the 984 frame;
 flat + patterned, Kai 2026-11-10)
 - Background: **emerald-light**, flat solid `#40BD7E` (element
-  `bg-emerald-light.svg`).
+  `bg-emerald-light.svg`; patterned version
+  `bg-emerald-light-patterned.svg`).
 - The background is **flat, never a gradient** (Kai, 2026-11-10 — the gradient
   was the assistant's invention; the style already said "flat fills, no
-  gradients"). It carries a small tone-on-tone pattern instead, after 皆謎's
-  tone-on-tone walking-person pattern in its sidebar: a small `?` (the
-  riddle's own symbol), staggered, in the next ramp step at 40% opacity.
-  Flat, but not boring. The pattern shows only in the bands — the riddle
-  square covers the middle, the way 皆謎's pattern lives in the sidebar,
-  not the content area.
+  gradients"). The patterned version carries a tone-on-tone key tessellation
+  instead, after 皆謎's tone-on-tone walking-person pattern in its sidebar:
+  a basketweave tessellation of 1×2 rectangles, each holding one key
+  big-as-possible (Kai, 2026-11-10), the whole tessellation rotated 23.1°
+  so no key is horizontal or vertical. Half the keys are mirrored so all
+  teeth face up or right, never down or left. Pattern colour is a solid one
+  shade from the fill — no transparency (a transparent overlay darkens where
+  the 3 bow circles overlap). Flat, but not boring. The pattern shows only
+  in the bands — the riddle square covers the middle, the way 皆謎's pattern
+  lives in the sidebar, not the content area.
 - The riddle square is the **brightest emerald tint** in the elements,
   `#E0F8E8` (element `square-emerald-pale-1080.svg`), and it is **as wide as
   the background — 1080 × 1080, no side margins**. TikTok canvas 1080 × 1920:
@@ -91,10 +96,12 @@ flat + patterned, Kai 2026-11-10)
   is what the eye reads.
 - For other ratios (16:9, 4:5, 1:1) the same square recentres and the bands shrink;
   the square never crops.
-- Background palette (flat solid + tone-on-tone `?` pattern): **Navy**
+- Background palette (each colour in plain + patterned): **Navy**
   `#080A1A`, **Indigo** `#1E1B4B`, **Teal** `#062A2E`, **Plum** `#2A1530`,
   **Cream** `#FFF6E5` (light option), **Cream-emerald** `#E0F8E8`,
   **Emerald** `#168654`, **Emerald-light** `#40BD7E`.
+- Key motif (element `motifs/motif-key.svg`): a minimal flat key — bow of 3
+  small solid circles, shaft, 2 teeth — in emerald-deep `#0D5038`.
 
 ## Top / bottom bands — the series template (Kai, 2026-11-07; after 皆謎 / 一枚謎)
 The bands carry the fixed series elements, the way 皆謎's sidebar does

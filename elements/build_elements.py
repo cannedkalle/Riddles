@@ -15,7 +15,9 @@ rectangles, no rounded joins. Curves appear only where the curve IS the shape
 (circle, ring, heart, arc, sparkle).
 
 Outputs under ~/workspace/single-image-riddle/elements/:
-  backgrounds/  bg-<name>.svg        1080 x 1920, flat solid + tone-on-tone "?" pattern
+  backgrounds/  bg-<name>.svg        1080 x 1920, flat solid (plain)
+  backgrounds/  bg-<name>-patterned.svg  1080 x 1920, flat solid + key tessellation
+  motifs/       motif-key.svg        100 x 100, the key motif (emerald-deep)
   squares/      square-<name>.svg    984 x 984 empty riddle square, sharp corners
   squares/      square-<name>-1080.svg  1080 x 1080 full-width riddle square
   shapes/       <shape>-<colour>-<size>.svg   sizes s=120, m=240, l=480 (transparent bg)
@@ -122,49 +124,95 @@ def write(path, content):
 
 counts = {}
 
-# ---- backgrounds: 1080 x 1920, FLAT solid colour + small tone-on-tone pattern ----
+# ---- backgrounds: 1080 x 1920, FLAT solid colour; plain + key-patterned ----
 # Kai, 2026-11-10: the gradient was the assistant's invention — nobody asked
 # for it, and it contradicts the flat-fill language (皆謎 uses flat fills; the
-# riddle square is a flat colour plate). So: one solid colour, plus a small
-# repeating pattern like 皆謎's tone-on-tone walking people — flat, but not
-# boring. The motif is a small "?" (the riddle's own symbol), staggered in a
-# brick layout (240 x 240 tile, "?" at (60,60) and (180,180)), in the next
-# ramp step at 40% opacity. It shows only in the bands — the riddle square
-# covers the middle, the way 皆謎's pattern lives in the sidebar, not the
-# content area.
+# riddle square is a flat colour plate). So: one solid colour, flat but not
+# boring — the patterned version carries a tone-on-tone key tessellation
+# (after 皆謎's tone-on-tone walking-person pattern). The pattern shows only
+# in the bands; the riddle square covers the middle, the way 皆謎's pattern
+# lives in the sidebar, not the content area.
+#
+# Key motif (Kai, 2026-11-10): a minimal flat key — bow of 3 small solid
+# circles (a trefoil), shaft, 2 teeth. Pattern = basketweave tessellation of
+# 1x2 rectangles (dominoes), each rectangle holding one key big-as-possible
+# (60px tall in a 120x60 domino), whole tessellation rotated 23.1 deg so no
+# key is horizontal/vertical. Half the keys are mirrored so ALL teeth face
+# up or right, never down or left (Kai, 2026-11-10) — that is what closes
+# the gaps. Pattern colour is a solid one shade from the fill (no
+# transparency — Kai, 2026-11-10: a transparent overlay darkens where the
+# 3 bow circles overlap). Every key is written out explicitly (no <use>),
+# so the files stay standalone.
 _font = TTFont("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
 _glyphset = _font.getGlyphSet()
 
-def _qmark_transform(target_h):
-    """Scale/centre for the '?' glyph at target_h px tall, centred at (0,0)."""
-    glyph = _glyphset["question"]
-    bpen = BoundsPen(_glyphset)
-    glyph.draw(bpen)
-    x0, y0, x1, y1 = bpen.bounds
-    cx, cy, h = (x0 + x1) / 2, (y0 + y1) / 2, y1 - y0
-    spen = SVGPathPen(_glyphset)
-    glyph.draw(spen)
-    d = spen.getCommands()
-    k = target_h / h
-    return d, k, cx, cy
+KEY_BODY = ('<circle cx="30" cy="50" r="10" fill="{c}"/>'
+            '<circle cx="44" cy="42" r="10" fill="{c}"/>'
+            '<circle cx="44" cy="58" r="10" fill="{c}"/>'
+            '<rect x="50" y="45.5" width="40" height="9" fill="{c}"/>'
+            '<rect x="72" y="54.5" width="7" height="13" fill="{c}"/>'
+            '<rect x="82" y="54.5" width="7" height="9" fill="{c}"/>')
 
-_QD, _QK, _QCX, _QCY = _qmark_transform(28)
+# basketweave: 8 dominoes per 240x240 tile (1 unit = 60px, domino 120x60)
+_KEY_DOMINOES = [
+    ((60, 30), 0), ((60, 90), 0),
+    ((150, 60), 90), ((210, 60), 90),
+    ((30, 180), 90), ((90, 180), 90),
+    ((180, 150), 0), ((180, 210), 0),
+]
+_KEY_FLIPS = [0, 180, 0, 180, 0, 180, 0, 180]
+_KEY_ROT = 23.1
+_KEY_K = 60.0 / 36.0
 
-def _pattern_def(pat):
-    q = (f'<path d="{_QD}" fill="{pat}" fill-opacity="0.4" '
-         f'transform="translate(60,60) scale({_QK:.4f},{-_QK:.4f}) '
-         f'translate({-_QCX:.1f},{-_QCY:.1f})"/>')
-    q2 = q.replace("translate(60,60)", "translate(180,180)")
-    return (f'<defs><pattern id="pat" width="240" height="240" '
-            f'patternUnits="userSpaceOnUse">{q}{q2}</pattern></defs>')
+def _key_tessellation(pat, W=1080, H=1920):
+    """Explicit key shapes covering a W x H canvas (basketweave, 23.1 deg)."""
+    cx, cy, margin = W / 2, H / 2, 90
+    out = []
+    i0 = int(math.floor((0 - margin) / 240)) - 1
+    i1 = int(math.ceil((W + margin) / 240)) + 1
+    j0 = int(math.floor((0 - margin) / 240)) - 1
+    j1 = int(math.ceil((H + margin) / 240)) + 1
+    for i in range(i0, i1 + 1):
+        for j in range(j0, j1 + 1):
+            ox, oy = 240 * i, 240 * j
+            for idx, ((lx, ly), axis) in enumerate(_KEY_DOMINOES):
+                gx, gy = ox + lx, oy + ly
+                r = math.radians(_KEY_ROT)
+                dx, dy = gx - cx, gy - cy
+                rx = cx + dx * math.cos(r) - dy * math.sin(r)
+                ry = cy + dx * math.sin(r) + dy * math.cos(r)
+                if not (-margin <= rx <= W + margin and -margin <= ry <= H + margin):
+                    continue
+                ang = _KEY_ROT + axis + _KEY_FLIPS[idx]
+                if _KEY_FLIPS[idx] == 0:
+                    t = (f'translate({rx:.1f},{ry:.1f}) rotate({ang}) '
+                         f'scale({_KEY_K:.4f},{-_KEY_K:.4f}) translate(-55,-50)')
+                else:
+                    t = (f'translate({rx:.1f},{ry:.1f}) rotate({ang}) '
+                         f'scale({_KEY_K:.4f}) translate(-55,-50)')
+                out.append(f'<g transform="{t}">' + KEY_BODY.format(c=pat) + '</g>')
+    return "".join(out)
+
+def _bg_svg(fill, pat=None):
+    head = ('<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" '
+            'viewBox="0 0 1080 1920">')
+    body = f'<rect width="1080" height="1920" fill="{fill}"/>'
+    if pat is not None:
+        body += _key_tessellation(pat)
+    return head + body + '</svg>'
 
 for name, fill, pat in BACKGROUNDS:
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">'
-           + _pattern_def(pat)
-           + f'<rect width="1080" height="1920" fill="{fill}"/>'
-           + f'<rect width="1080" height="1920" fill="url(#pat)"/></svg>')
-    write(os.path.join(HERE, "backgrounds", f"bg-{name}.svg"), svg)
-counts["backgrounds"] = len(BACKGROUNDS)
+    write(os.path.join(HERE, "backgrounds", f"bg-{name}.svg"), _bg_svg(fill))
+    write(os.path.join(HERE, "backgrounds", f"bg-{name}-patterned.svg"), _bg_svg(fill, pat))
+counts["backgrounds"] = len(BACKGROUNDS) * 2
+
+# ---- key motif: the standalone motif file (motifs/, 100 x 100) ----
+# The motif behind the patterned backgrounds. Emerald-deep, the colour used
+# in the review sheet. Bbox x 20-90, y 32-68, centre (55,50).
+write(os.path.join(HERE, "motifs", "motif-key.svg"),
+      ('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">'
+       + KEY_BODY.format(c=COLORS["emerald-deep"]) + '</svg>'))
+counts["motifs"] = 1
 
 # ---- empty riddle squares: 984 x 984, sharp corners, transparent outside ----
 for name, fill, border in SQUARES:
@@ -311,15 +359,30 @@ lines = ["# Elements — individual SVGs for image editors",
          "",
          "## Backgrounds (`backgrounds/`, 1080 × 1920)",
          "",
-         "Flat solid colour, plus a small tone-on-tone `?` pattern (Kai,",
-         "2026-11-10 — after 皆謎's tone-on-tone walking-person pattern). The",
-         "pattern shows only in the bands; the riddle square covers the middle.",
+         "Flat solid colour. Each colour comes in two versions: plain (the",
+         "solid colour only) and patterned (the solid colour plus a tone-on-tone",
+         "key tessellation — Kai, 2026-11-10, after 皆謎's tone-on-tone",
+         "walking-person pattern). The pattern shows only in the bands; the",
+         "riddle square covers the middle.",
+         "",
+         "The pattern is a basketweave tessellation of 1×2 rectangles, each",
+         "holding one key big-as-possible, the whole tessellation rotated 23.1°",
+         "so no key is horizontal or vertical. Half the keys are mirrored so",
+         "all teeth face up or right, never down or left. Pattern colour is a",
+         "solid one shade from the fill — no transparency.",
          "",
          "| file | fill | pattern |",
          "|---|---|---|"]
 for name, fill, pat in BACKGROUNDS:
-    lines.append(f"| `bg-{name}.svg` | `{fill}` | `{pat}` at 40% |")
+    lines.append(f"| `bg-{name}.svg` (plain) | `{fill}` | — |")
+    lines.append(f"| `bg-{name}-patterned.svg` | `{fill}` | `{pat}` solid |")
 lines += ["",
+          "## Key motif (`motifs/`, 100 × 100)",
+          "",
+          "`motif-key.svg` — the motif behind the patterned backgrounds: a",
+          "minimal flat key (bow of 3 small solid circles, shaft, 2 teeth),",
+          "in emerald-deep `#0D5038`. Bbox x 20–90, y 32–68, centre (55,50).",
+          "",
           "## Empty riddle squares (`squares/`, 984 × 984, sharp corners, transparent outside)",
           "",
           "| file | panel | border |",
@@ -374,7 +437,9 @@ lines += ["",
           "major lines every 90 px (the 12-column grid), riddle-square boundary",
           "(y 420–1500) emphasized. Emerald-deep `#0D5038`, low opacity.",
           "",
-          f"Counts: {counts['backgrounds']} backgrounds, {counts['squares']} squares, "
+          f"Counts: {counts['backgrounds']} backgrounds "
+          f"({len(BACKGROUNDS)} plain + {len(BACKGROUNDS)} patterned), "
+          f"{counts['motifs']} key motif, {counts['squares']} squares, "
           f"{counts['squares_full']} full-width riddle square, "
           f"{counts['shapes']} shapes "
           f"({len(SHAPES)} shapes × {len(COLORS)} colours × {len(SIZES)} sizes), "

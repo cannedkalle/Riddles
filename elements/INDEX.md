@@ -13,20 +13,42 @@ Curves appear only where the curve IS the shape: circle, ring, heart, arc, spark
 
 ## Backgrounds (`backgrounds/`, 1080 × 1920)
 
-Flat solid colour, plus a small tone-on-tone `?` pattern (Kai,
-2026-11-10 — after 皆謎's tone-on-tone walking-person pattern). The
-pattern shows only in the bands; the riddle square covers the middle.
+Flat solid colour. Each colour comes in two versions: plain (the
+solid colour only) and patterned (the solid colour plus a tone-on-tone
+key tessellation — Kai, 2026-11-10, after 皆謎's tone-on-tone
+walking-person pattern). The pattern shows only in the bands; the
+riddle square covers the middle.
+
+The pattern is a basketweave tessellation of 1×2 rectangles, each
+holding one key big-as-possible, the whole tessellation rotated 23.1°
+so no key is horizontal or vertical. Half the keys are mirrored so
+all teeth face up or right, never down or left. Pattern colour is a
+solid one shade from the fill — no transparency.
 
 | file | fill | pattern |
 |---|---|---|
-| `bg-navy.svg` | `#080A1A` | `#141B3D` at 40% |
-| `bg-indigo.svg` | `#1E1B4B` | `#312E81` at 40% |
-| `bg-teal.svg` | `#062A2E` | `#0B4B50` at 40% |
-| `bg-plum.svg` | `#2A1530` | `#4A1D4D` at 40% |
-| `bg-cream.svg` | `#FFF6E5` | `#FDEED3` at 40% |
-| `bg-cream-emerald.svg` | `#E0F8E8` | `#94DEAF` at 40% |
-| `bg-emerald.svg` | `#168654` | `#0D5038` at 40% |
-| `bg-emerald-light.svg` | `#40BD7E` | `#168654` at 40% |
+| `bg-navy.svg` (plain) | `#080A1A` | — |
+| `bg-navy-patterned.svg` | `#080A1A` | `#141B3D` solid |
+| `bg-indigo.svg` (plain) | `#1E1B4B` | — |
+| `bg-indigo-patterned.svg` | `#1E1B4B` | `#312E81` solid |
+| `bg-teal.svg` (plain) | `#062A2E` | — |
+| `bg-teal-patterned.svg` | `#062A2E` | `#0B4B50` solid |
+| `bg-plum.svg` (plain) | `#2A1530` | — |
+| `bg-plum-patterned.svg` | `#2A1530` | `#4A1D4D` solid |
+| `bg-cream.svg` (plain) | `#FFF6E5` | — |
+| `bg-cream-patterned.svg` | `#FFF6E5` | `#FDEED3` solid |
+| `bg-cream-emerald.svg` (plain) | `#E0F8E8` | — |
+| `bg-cream-emerald-patterned.svg` | `#E0F8E8` | `#94DEAF` solid |
+| `bg-emerald.svg` (plain) | `#168654` | — |
+| `bg-emerald-patterned.svg` | `#168654` | `#0D5038` solid |
+| `bg-emerald-light.svg` (plain) | `#40BD7E` | — |
+| `bg-emerald-light-patterned.svg` | `#40BD7E` | `#168654` solid |
+
+## Key motif (`motifs/`, 100 × 100)
+
+`motif-key.svg` — the motif behind the patterned backgrounds: a
+minimal flat key (bow of 3 small solid circles, shaft, 2 teeth),
+in emerald-deep `#0D5038`. Bbox x 20–90, y 32–68, centre (55,50).
 
 ## Empty riddle squares (`squares/`, 984 × 984, sharp corners, transparent outside)
 
@@ -99,4 +121,4 @@ alignment), then remove it for the final. Minor lines every 30 px,
 major lines every 90 px (the 12-column grid), riddle-square boundary
 (y 420–1500) emphasized. Emerald-deep `#0D5038`, low opacity.
 
-Counts: 8 backgrounds, 9 squares, 1 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 210 digits (10 digits × 7 colours × 3 sizes), 3 question indicators, 1 layout grid.
+Counts: 16 backgrounds (8 plain + 8 patterned), 1 key motif, 9 squares, 1 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 210 digits (10 digits × 7 colours × 3 sizes), 3 question indicators, 1 layout grid.
