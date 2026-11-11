@@ -101,7 +101,9 @@ flat + patterned, Kai 2026-11-10)
   **Cream** `#FFF6E5` (light option), **Cream-emerald** `#E0F8E8`,
   **Emerald** `#168654`, **Emerald-light** `#40BD7E`.
 - Key motif (element `motifs/motif-key.svg`): a minimal flat key — bow of 3
-  small solid circles, shaft, 2 teeth — in emerald-deep `#0D5038`.
+  small solid circles, shaft, 2 teeth — in emerald-deep `#0D5038`. One tint
+  per background, `motifs/motif-key-<name>.svg`, in that background's pattern
+  colour (one shade darker).
 
 ## Top / bottom bands — the series template (Kai, 2026-11-07; after 皆謎 / 一枚謎)
 The bands carry the fixed series elements, the way 皆謎's sidebar does

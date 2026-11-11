@@ -46,9 +46,23 @@ solid one shade from the fill — no transparency.
 
 ## Key motif (`motifs/`, 100 × 100)
 
-`motif-key.svg` — the motif behind the patterned backgrounds: a
-minimal flat key (bow of 3 small solid circles, shaft, 2 teeth),
-in emerald-deep `#0D5038`. Bbox x 20–90, y 32–68, centre (55,50).
+The motif behind the patterned backgrounds: a minimal flat key
+(bow of 3 small solid circles, shaft, 2 teeth). Bbox x 20–90,
+y 32–68, centre (55,50). One file per background, in that
+background's pattern colour (one shade darker — Kai, 2026-11-10),
+plus the default in emerald-deep.
+
+| file | colour | for background |
+|---|---|---|
+| `motif-key.svg` (default) | `#0D5038` | — |
+| `motif-key-navy.svg` | `#141B3D` | `bg-navy` (`#080A1A`) |
+| `motif-key-indigo.svg` | `#312E81` | `bg-indigo` (`#1E1B4B`) |
+| `motif-key-teal.svg` | `#0B4B50` | `bg-teal` (`#062A2E`) |
+| `motif-key-plum.svg` | `#4A1D4D` | `bg-plum` (`#2A1530`) |
+| `motif-key-cream.svg` | `#FDEED3` | `bg-cream` (`#FFF6E5`) |
+| `motif-key-cream-emerald.svg` | `#94DEAF` | `bg-cream-emerald` (`#E0F8E8`) |
+| `motif-key-emerald.svg` | `#0D5038` | `bg-emerald` (`#168654`) |
+| `motif-key-emerald-light.svg` | `#168654` | `bg-emerald-light` (`#40BD7E`) |
 
 ## Empty riddle squares (`squares/`, 984 × 984, sharp corners, transparent outside)
 
@@ -121,4 +135,4 @@ alignment), then remove it for the final. Minor lines every 30 px,
 major lines every 90 px (the 12-column grid), riddle-square boundary
 (y 420–1500) emphasized. Emerald-deep `#0D5038`, low opacity.
 
-Counts: 16 backgrounds (8 plain + 8 patterned), 1 key motif, 9 squares, 1 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 210 digits (10 digits × 7 colours × 3 sizes), 3 question indicators, 1 layout grid.
+Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 9 squares, 1 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 210 digits (10 digits × 7 colours × 3 sizes), 3 question indicators, 1 layout grid.

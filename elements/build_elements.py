@@ -206,13 +206,20 @@ for name, fill, pat in BACKGROUNDS:
     write(os.path.join(HERE, "backgrounds", f"bg-{name}-patterned.svg"), _bg_svg(fill, pat))
 counts["backgrounds"] = len(BACKGROUNDS) * 2
 
-# ---- key motif: the standalone motif file (motifs/, 100 x 100) ----
-# The motif behind the patterned backgrounds. Emerald-deep, the colour used
-# in the review sheet. Bbox x 20-90, y 32-68, centre (55,50).
-write(os.path.join(HERE, "motifs", "motif-key.svg"),
-      ('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">'
-       + KEY_BODY.format(c=COLORS["emerald-deep"]) + '</svg>'))
-counts["motifs"] = 1
+# ---- key motif: the standalone motif files (motifs/, 100 x 100) ----
+# The motif behind the patterned backgrounds. Bbox x 20-90, y 32-68,
+# centre (55,50). One file per background, in that background's pattern
+# colour (one shade darker — Kai, 2026-11-10), plus the default in
+# emerald-deep (the colour used in the review sheet). Note: the default
+# `motif-key.svg` is the same colour as `motif-key-emerald.svg`.
+def _motif_svg(colour):
+    return ('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">'
+            + KEY_BODY.format(c=colour) + '</svg>')
+
+write(os.path.join(HERE, "motifs", "motif-key.svg"), _motif_svg(COLORS["emerald-deep"]))
+for name, fill, pat in BACKGROUNDS:
+    write(os.path.join(HERE, "motifs", f"motif-key-{name}.svg"), _motif_svg(pat))
+counts["motifs"] = 1 + len(BACKGROUNDS)
 
 # ---- empty riddle squares: 984 x 984, sharp corners, transparent outside ----
 for name, fill, border in SQUARES:
@@ -379,10 +386,18 @@ for name, fill, pat in BACKGROUNDS:
 lines += ["",
           "## Key motif (`motifs/`, 100 × 100)",
           "",
-          "`motif-key.svg` — the motif behind the patterned backgrounds: a",
-          "minimal flat key (bow of 3 small solid circles, shaft, 2 teeth),",
-          "in emerald-deep `#0D5038`. Bbox x 20–90, y 32–68, centre (55,50).",
+          "The motif behind the patterned backgrounds: a minimal flat key",
+          "(bow of 3 small solid circles, shaft, 2 teeth). Bbox x 20–90,",
+          "y 32–68, centre (55,50). One file per background, in that",
+          "background's pattern colour (one shade darker — Kai, 2026-11-10),",
+          "plus the default in emerald-deep.",
           "",
+          "| file | colour | for background |",
+          "|---|---|---|",
+          "| `motif-key.svg` (default) | `#0D5038` | — |"]
+for name, fill, pat in BACKGROUNDS:
+    lines.append(f"| `motif-key-{name}.svg` | `{pat}` | `bg-{name}` (`{fill}`) |")
+lines += ["",
           "## Empty riddle squares (`squares/`, 984 × 984, sharp corners, transparent outside)",
           "",
           "| file | panel | border |",
@@ -439,7 +454,7 @@ lines += ["",
           "",
           f"Counts: {counts['backgrounds']} backgrounds "
           f"({len(BACKGROUNDS)} plain + {len(BACKGROUNDS)} patterned), "
-          f"{counts['motifs']} key motif, {counts['squares']} squares, "
+          f"{counts['motifs']} key motifs, {counts['squares']} squares, "
           f"{counts['squares_full']} full-width riddle square, "
           f"{counts['shapes']} shapes "
           f"({len(SHAPES)} shapes × {len(COLORS)} colours × {len(SIZES)} sizes), "
