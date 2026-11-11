@@ -58,30 +58,37 @@ COLORS = {
 }
 THEME = "emerald"  # anchor #40BD7E
 
-BACKGROUNDS = [  # name, flat fill, tone-on-tone pattern colour (Kai, 2026-11-10)
-    ("navy",   "#080A1A", "#141B3D"),
-    ("indigo", "#1E1B4B", "#312E81"),
-    ("teal",   "#062A2E", "#0B4B50"),
-    ("plum",   "#2A1530", "#4A1D4D"),
-    ("cream",  "#FFF6E5", "#FDEED3"),
-    ("cream-emerald", "#E0F8E8", "#94DEAF"),  # theme ramp, pale end
-    ("emerald", "#168654", "#0D5038"),         # dark step — keeps it distinct
+BACKGROUNDS = [  # name, flat fill, tone-on-tone pattern colour
+    # Kai, 2026-11-10: the pattern is only SLIGHTLY darker/lighter than the
+    # fill — a 6-point lightness step, same direction as before (darker for
+    # the light/emerald fills, lighter for the dark fills), so the keys are
+    # barely there. The old one-shade step (#94DEAF on #E0F8E8, etc.) was
+    # too obvious. Colours below are the approved subtle set.
+    ("navy",   "#080A1A", "#0F1331"),
+    ("indigo", "#1E1B4B", "#272362"),
+    ("teal",   "#062A2E", "#0A4349"),
+    ("plum",   "#2A1530", "#3D1E45"),
+    ("cream",  "#FFF6E5", "#FFEBC6"),
+    ("cream-emerald", "#E0F8E8", "#C7F2D5"),  # theme ramp, pale end
+    ("emerald", "#168654", "#126C44"),         # dark step — keeps it distinct
                                               # from emerald-light (see below)
-    ("emerald-light", "#40BD7E", "#168654"),   # the theme anchor — the page
+    ("emerald-light", "#40BD7E", "#38A66F"),   # the theme anchor — the page
                                               # background (Kai, 2026-11-07)
 ]
 
-# empty riddle square: name, panel fill, border colour — SHARP corners (rx 0)
+# empty riddle square: name, panel fill — SHARP corners (rx 0), NO outline
+# (Kai, 2026-11-10: remove the outline — a square is only a colour plate,
+# like the full-width one.)
 SQUARES = [
-    ("navy",   "#0E1330", COLORS["paper"]),
-    ("indigo", "#232052", COLORS["lilac"]),
-    ("teal",   "#0A3338", COLORS["mint"]),
-    ("plum",   "#331A3A", COLORS["coral"]),
-    ("cream",  "#FFFFFF", COLORS["ink"]),
-    ("paper",  "#FFF6E5", COLORS["ink"]),
-    ("ink",    "#101828", COLORS["paper"]),
-    ("emerald", "#40BD7E", COLORS["emerald-deep"]),
-    ("cream-emerald", "#E0F8E8", COLORS["emerald-deep"]),
+    ("navy",   "#0E1330"),
+    ("indigo", "#232052"),
+    ("teal",   "#0A3338"),
+    ("plum",   "#331A3A"),
+    ("cream",  "#FFFFFF"),
+    ("paper",  "#FFF6E5"),
+    ("ink",    "#101828"),
+    ("emerald", "#40BD7E"),
+    ("cream-emerald", "#E0F8E8"),
 ]
 
 # full-width riddle square (Kai, 2026-11-07): as wide as the background,
@@ -134,15 +141,20 @@ counts = {}
 # lives in the sidebar, not the content area.
 #
 # Key motif (Kai, 2026-11-10): a minimal flat key — bow of 3 small solid
-# circles (a trefoil), shaft, 2 teeth. Pattern = basketweave tessellation of
-# 1x2 rectangles (dominoes), each rectangle holding one key big-as-possible
-# (60px tall in a 120x60 domino), whole tessellation rotated 23.1 deg so no
-# key is horizontal/vertical. Half the keys are mirrored so ALL teeth face
-# up or right, never down or left (Kai, 2026-11-10) — that is what closes
-# the gaps. Pattern colour is a solid one shade from the fill (no
-# transparency — Kai, 2026-11-10: a transparent overlay darkens where the
-# 3 bow circles overlap). Every key is written out explicitly (no <use>),
-# so the files stay standalone.
+# circles (a trefoil), shaft, 2 teeth. Pattern colour is a SOLID colour
+# only slightly darker/lighter than the fill (Kai, 2026-11-10: the old
+# one-shade step was too obvious) — no transparency, because a transparent
+# overlay darkens where the 3 bow circles overlap.
+#
+# Patterned backgrounds are built from Kai's own Figma export, not from a
+# programmatic tessellation: `figma-pattern-template.svg` is the cleaned
+# Figma file (cream-emerald, #E0F8E8 / #94DEAF) with everything outside the
+# 1080x1920 background removed and the rest clipped to it, the <use>
+# elements inlined so the file stays standalone (no <use>), and the two
+# colours kept as plain fill attributes so they swap cleanly. Each
+# patterned background is that template with the two colours substituted.
+# (The earlier programmatic basketweave — 23.1 deg, mirrored teeth — is
+# superseded by Kai's Figma arrangement; it is not regenerated.)
 _font = TTFont("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf")
 _glyphset = _font.getGlyphSet()
 
@@ -153,57 +165,26 @@ KEY_BODY = ('<circle cx="30" cy="50" r="10" fill="{c}"/>'
             '<rect x="72" y="54.5" width="7" height="13" fill="{c}"/>'
             '<rect x="82" y="54.5" width="7" height="9" fill="{c}"/>')
 
-# basketweave: 8 dominoes per 240x240 tile (1 unit = 60px, domino 120x60)
-_KEY_DOMINOES = [
-    ((60, 30), 0), ((60, 90), 0),
-    ((150, 60), 90), ((210, 60), 90),
-    ((30, 180), 90), ((90, 180), 90),
-    ((180, 150), 0), ((180, 210), 0),
-]
-_KEY_FLIPS = [0, 180, 0, 180, 0, 180, 0, 180]
-_KEY_ROT = 23.1
-_KEY_K = 60.0 / 36.0
+# Template colours in figma-pattern-template.svg (cream-emerald as exported).
+_TMPL_FILL, _TMPL_PAT = "#E0F8E8", "#94DEAF"
+with open(os.path.join(HERE, "figma-pattern-template.svg")) as _f:
+    _TMPL = _f.read().rstrip("\n")
 
-def _key_tessellation(pat, W=1080, H=1920):
-    """Explicit key shapes covering a W x H canvas (basketweave, 23.1 deg)."""
-    cx, cy, margin = W / 2, H / 2, 90
-    out = []
-    i0 = int(math.floor((0 - margin) / 240)) - 1
-    i1 = int(math.ceil((W + margin) / 240)) + 1
-    j0 = int(math.floor((0 - margin) / 240)) - 1
-    j1 = int(math.ceil((H + margin) / 240)) + 1
-    for i in range(i0, i1 + 1):
-        for j in range(j0, j1 + 1):
-            ox, oy = 240 * i, 240 * j
-            for idx, ((lx, ly), axis) in enumerate(_KEY_DOMINOES):
-                gx, gy = ox + lx, oy + ly
-                r = math.radians(_KEY_ROT)
-                dx, dy = gx - cx, gy - cy
-                rx = cx + dx * math.cos(r) - dy * math.sin(r)
-                ry = cy + dx * math.sin(r) + dy * math.cos(r)
-                if not (-margin <= rx <= W + margin and -margin <= ry <= H + margin):
-                    continue
-                ang = _KEY_ROT + axis + _KEY_FLIPS[idx]
-                if _KEY_FLIPS[idx] == 0:
-                    t = (f'translate({rx:.1f},{ry:.1f}) rotate({ang}) '
-                         f'scale({_KEY_K:.4f},{-_KEY_K:.4f}) translate(-55,-50)')
-                else:
-                    t = (f'translate({rx:.1f},{ry:.1f}) rotate({ang}) '
-                         f'scale({_KEY_K:.4f}) translate(-55,-50)')
-                out.append(f'<g transform="{t}">' + KEY_BODY.format(c=pat) + '</g>')
-    return "".join(out)
+def _bg_svg(fill):
+    return ('<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" '
+            f'viewBox="0 0 1080 1920"><rect width="1080" height="1920" fill="{fill}"/></svg>')
 
-def _bg_svg(fill, pat=None):
-    head = ('<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" '
-            'viewBox="0 0 1080 1920">')
-    body = f'<rect width="1080" height="1920" fill="{fill}"/>'
-    if pat is not None:
-        body += _key_tessellation(pat)
-    return head + body + '</svg>'
+def _bg_patterned_svg(fill, pat):
+    # Substitute the template's two colours (via placeholders so a fill that
+    # happens to equal the old pattern colour cannot collide).
+    return (_TMPL.replace(_TMPL_FILL, "__FILL__")
+                 .replace(_TMPL_PAT, pat)
+                 .replace("__FILL__", fill))
 
 for name, fill, pat in BACKGROUNDS:
     write(os.path.join(HERE, "backgrounds", f"bg-{name}.svg"), _bg_svg(fill))
-    write(os.path.join(HERE, "backgrounds", f"bg-{name}-patterned.svg"), _bg_svg(fill, pat))
+    write(os.path.join(HERE, "backgrounds", f"bg-{name}-patterned.svg"),
+          _bg_patterned_svg(fill, pat))
 counts["backgrounds"] = len(BACKGROUNDS) * 2
 
 # ---- key motif: the standalone motif files (motifs/, 100 x 100) ----
@@ -222,16 +203,16 @@ for name, fill, pat in BACKGROUNDS:
 counts["motifs"] = 1 + len(BACKGROUNDS)
 
 # ---- empty riddle squares: 984 x 984, sharp corners, transparent outside ----
-for name, fill, border in SQUARES:
+# Flat colour plate, NO outline (Kai, 2026-11-10).
+for name, fill in SQUARES:
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="984" height="984" viewBox="0 0 984 984">'
-           f'<rect x="0" y="0" width="984" height="984" fill="{fill}" '
-           f'stroke="{border}" stroke-width="6" stroke-opacity="0.4"/></svg>')
+           f'<rect x="0" y="0" width="984" height="984" fill="{fill}"/></svg>')
     write(os.path.join(HERE, "squares", f"square-{name}.svg"), svg)
 counts["squares"] = len(SQUARES)
 
 # ---- full-width riddle square: 1080 x 1080, flat colour plate, NO outline ----
 # (Kai, 2026-11-07: remove the outline — the square is only a colour plate.)
-for name, fill, border in SQUARES_FULL:
+for name, fill, _border in SQUARES_FULL:
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">'
            f'<rect x="0" y="0" width="1080" height="1080" fill="{fill}"/></svg>')
     write(os.path.join(HERE, "squares", f"square-{name}-1080.svg"), svg)
@@ -372,11 +353,12 @@ lines = ["# Elements — individual SVGs for image editors",
          "walking-person pattern). The pattern shows only in the bands; the",
          "riddle square covers the middle.",
          "",
-         "The pattern is a basketweave tessellation of 1×2 rectangles, each",
-         "holding one key big-as-possible, the whole tessellation rotated 23.1°",
-         "so no key is horizontal or vertical. Half the keys are mirrored so",
-         "all teeth face up or right, never down or left. Pattern colour is a",
-         "solid one shade from the fill — no transparency.",
+         "The pattern is Kai's own Figma arrangement of the key motif —",
+         "built in Figma, exported, and cleaned up here (everything outside",
+         "the 1080×1920 background removed, the rest clipped to it; source:",
+         "`figma-pattern-template.svg`). Pattern colour is a solid colour",
+         "only slightly darker/lighter than the fill (Kai, 2026-11-10: the",
+         "old one-shade step was too obvious) — no transparency.",
          "",
          "| file | fill | pattern |",
          "|---|---|---|"]
@@ -389,8 +371,8 @@ lines += ["",
           "The motif behind the patterned backgrounds: a minimal flat key",
           "(bow of 3 small solid circles, shaft, 2 teeth). Bbox x 20–90,",
           "y 32–68, centre (55,50). One file per background, in that",
-          "background's pattern colour (one shade darker — Kai, 2026-11-10),",
-          "plus the default in emerald-deep.",
+          "background's pattern colour (only slightly darker/lighter than the",
+          "fill — Kai, 2026-11-10), plus the default in emerald-deep.",
           "",
           "| file | colour | for background |",
           "|---|---|---|",
@@ -400,10 +382,12 @@ for name, fill, pat in BACKGROUNDS:
 lines += ["",
           "## Empty riddle squares (`squares/`, 984 × 984, sharp corners, transparent outside)",
           "",
-          "| file | panel | border |",
-          "|---|---|---|"]
-for name, fill, border in SQUARES:
-    lines.append(f"| `square-{name}.svg` | `{fill}` | `{border}` at 40% |")
+          "Flat colour plate, no outline (Kai, 2026-11-10).",
+          "",
+          "| file | panel |",
+          "|---|---|"]
+for name, fill in SQUARES:
+    lines.append(f"| `square-{name}.svg` | `{fill}` |")
 lines += ["",
           "## Full-width riddle square (`squares/`, 1080 × 1080, sharp corners)",
           "",

@@ -19,64 +19,67 @@ key tessellation — Kai, 2026-11-10, after 皆謎's tone-on-tone
 walking-person pattern). The pattern shows only in the bands; the
 riddle square covers the middle.
 
-The pattern is a basketweave tessellation of 1×2 rectangles, each
-holding one key big-as-possible, the whole tessellation rotated 23.1°
-so no key is horizontal or vertical. Half the keys are mirrored so
-all teeth face up or right, never down or left. Pattern colour is a
-solid one shade from the fill — no transparency.
+The pattern is Kai's own Figma arrangement of the key motif —
+built in Figma, exported, and cleaned up here (everything outside
+the 1080×1920 background removed, the rest clipped to it; source:
+`figma-pattern-template.svg`). Pattern colour is a solid colour
+only slightly darker/lighter than the fill (Kai, 2026-11-10: the
+old one-shade step was too obvious) — no transparency.
 
 | file | fill | pattern |
 |---|---|---|
 | `bg-navy.svg` (plain) | `#080A1A` | — |
-| `bg-navy-patterned.svg` | `#080A1A` | `#141B3D` solid |
+| `bg-navy-patterned.svg` | `#080A1A` | `#0F1331` solid |
 | `bg-indigo.svg` (plain) | `#1E1B4B` | — |
-| `bg-indigo-patterned.svg` | `#1E1B4B` | `#312E81` solid |
+| `bg-indigo-patterned.svg` | `#1E1B4B` | `#272362` solid |
 | `bg-teal.svg` (plain) | `#062A2E` | — |
-| `bg-teal-patterned.svg` | `#062A2E` | `#0B4B50` solid |
+| `bg-teal-patterned.svg` | `#062A2E` | `#0A4349` solid |
 | `bg-plum.svg` (plain) | `#2A1530` | — |
-| `bg-plum-patterned.svg` | `#2A1530` | `#4A1D4D` solid |
+| `bg-plum-patterned.svg` | `#2A1530` | `#3D1E45` solid |
 | `bg-cream.svg` (plain) | `#FFF6E5` | — |
-| `bg-cream-patterned.svg` | `#FFF6E5` | `#FDEED3` solid |
+| `bg-cream-patterned.svg` | `#FFF6E5` | `#FFEBC6` solid |
 | `bg-cream-emerald.svg` (plain) | `#E0F8E8` | — |
-| `bg-cream-emerald-patterned.svg` | `#E0F8E8` | `#94DEAF` solid |
+| `bg-cream-emerald-patterned.svg` | `#E0F8E8` | `#C7F2D5` solid |
 | `bg-emerald.svg` (plain) | `#168654` | — |
-| `bg-emerald-patterned.svg` | `#168654` | `#0D5038` solid |
+| `bg-emerald-patterned.svg` | `#168654` | `#126C44` solid |
 | `bg-emerald-light.svg` (plain) | `#40BD7E` | — |
-| `bg-emerald-light-patterned.svg` | `#40BD7E` | `#168654` solid |
+| `bg-emerald-light-patterned.svg` | `#40BD7E` | `#38A66F` solid |
 
 ## Key motif (`motifs/`, 100 × 100)
 
 The motif behind the patterned backgrounds: a minimal flat key
 (bow of 3 small solid circles, shaft, 2 teeth). Bbox x 20–90,
 y 32–68, centre (55,50). One file per background, in that
-background's pattern colour (one shade darker — Kai, 2026-11-10),
-plus the default in emerald-deep.
+background's pattern colour (only slightly darker/lighter than the
+fill — Kai, 2026-11-10), plus the default in emerald-deep.
 
 | file | colour | for background |
 |---|---|---|
 | `motif-key.svg` (default) | `#0D5038` | — |
-| `motif-key-navy.svg` | `#141B3D` | `bg-navy` (`#080A1A`) |
-| `motif-key-indigo.svg` | `#312E81` | `bg-indigo` (`#1E1B4B`) |
-| `motif-key-teal.svg` | `#0B4B50` | `bg-teal` (`#062A2E`) |
-| `motif-key-plum.svg` | `#4A1D4D` | `bg-plum` (`#2A1530`) |
-| `motif-key-cream.svg` | `#FDEED3` | `bg-cream` (`#FFF6E5`) |
-| `motif-key-cream-emerald.svg` | `#94DEAF` | `bg-cream-emerald` (`#E0F8E8`) |
-| `motif-key-emerald.svg` | `#0D5038` | `bg-emerald` (`#168654`) |
-| `motif-key-emerald-light.svg` | `#168654` | `bg-emerald-light` (`#40BD7E`) |
+| `motif-key-navy.svg` | `#0F1331` | `bg-navy` (`#080A1A`) |
+| `motif-key-indigo.svg` | `#272362` | `bg-indigo` (`#1E1B4B`) |
+| `motif-key-teal.svg` | `#0A4349` | `bg-teal` (`#062A2E`) |
+| `motif-key-plum.svg` | `#3D1E45` | `bg-plum` (`#2A1530`) |
+| `motif-key-cream.svg` | `#FFEBC6` | `bg-cream` (`#FFF6E5`) |
+| `motif-key-cream-emerald.svg` | `#C7F2D5` | `bg-cream-emerald` (`#E0F8E8`) |
+| `motif-key-emerald.svg` | `#126C44` | `bg-emerald` (`#168654`) |
+| `motif-key-emerald-light.svg` | `#38A66F` | `bg-emerald-light` (`#40BD7E`) |
 
 ## Empty riddle squares (`squares/`, 984 × 984, sharp corners, transparent outside)
 
-| file | panel | border |
-|---|---|---|
-| `square-navy.svg` | `#0E1330` | `#FFF6E5` at 40% |
-| `square-indigo.svg` | `#232052` | `#C4B5FD` at 40% |
-| `square-teal.svg` | `#0A3338` | `#6EE7B7` at 40% |
-| `square-plum.svg` | `#331A3A` | `#FB7185` at 40% |
-| `square-cream.svg` | `#FFFFFF` | `#101828` at 40% |
-| `square-paper.svg` | `#FFF6E5` | `#101828` at 40% |
-| `square-ink.svg` | `#101828` | `#FFF6E5` at 40% |
-| `square-emerald.svg` | `#40BD7E` | `#0D5038` at 40% |
-| `square-cream-emerald.svg` | `#E0F8E8` | `#0D5038` at 40% |
+Flat colour plate, no outline (Kai, 2026-11-10).
+
+| file | panel |
+|---|---|
+| `square-navy.svg` | `#0E1330` |
+| `square-indigo.svg` | `#232052` |
+| `square-teal.svg` | `#0A3338` |
+| `square-plum.svg` | `#331A3A` |
+| `square-cream.svg` | `#FFFFFF` |
+| `square-paper.svg` | `#FFF6E5` |
+| `square-ink.svg` | `#101828` |
+| `square-emerald.svg` | `#40BD7E` |
+| `square-cream-emerald.svg` | `#E0F8E8` |
 
 ## Full-width riddle square (`squares/`, 1080 × 1080, sharp corners)
 

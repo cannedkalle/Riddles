@@ -78,15 +78,16 @@ flat + patterned, Kai 2026-11-10)
 - The background is **flat, never a gradient** (Kai, 2026-11-10 — the gradient
   was the assistant's invention; the style already said "flat fills, no
   gradients"). The patterned version carries a tone-on-tone key tessellation
-  instead, after 皆謎's tone-on-tone walking-person pattern in its sidebar:
-  a basketweave tessellation of 1×2 rectangles, each holding one key
-  big-as-possible (Kai, 2026-11-10), the whole tessellation rotated 23.1°
-  so no key is horizontal or vertical. Half the keys are mirrored so all
-  teeth face up or right, never down or left. Pattern colour is a solid one
-  shade from the fill — no transparency (a transparent overlay darkens where
-  the 3 bow circles overlap). Flat, but not boring. The pattern shows only
-  in the bands — the riddle square covers the middle, the way 皆謎's pattern
-  lives in the sidebar, not the content area.
+  instead, after 皆謎's tone-on-tone walking-person pattern in its sidebar.
+  The pattern is Kai's own Figma arrangement of the key motif (Kai,
+  2026-11-10) — built in Figma, exported, and cleaned up into
+  `elements/figma-pattern-template.svg` (everything outside the 1080×1920
+  background removed, the rest clipped to it). Pattern colour is a solid
+  colour only slightly darker/lighter than the fill (Kai, 2026-11-10: the
+  old one-shade step was too obvious) — no transparency (a transparent
+  overlay darkens where the 3 bow circles overlap). Flat, but not boring.
+  The pattern shows only in the bands — the riddle square covers the
+  middle, the way 皆謎's pattern lives in the sidebar, not the content area.
 - The riddle square is the **brightest emerald tint** in the elements,
   `#E0F8E8` (element `square-emerald-pale-1080.svg`), and it is **as wide as
   the background — 1080 × 1080, no side margins**. TikTok canvas 1080 × 1920:
@@ -103,7 +104,7 @@ flat + patterned, Kai 2026-11-10)
 - Key motif (element `motifs/motif-key.svg`): a minimal flat key — bow of 3
   small solid circles, shaft, 2 teeth — in emerald-deep `#0D5038`. One tint
   per background, `motifs/motif-key-<name>.svg`, in that background's pattern
-  colour (one shade darker).
+  colour (only slightly darker/lighter than the fill).
 
 ## Top / bottom bands — the series template (Kai, 2026-11-07; after 皆謎 / 一枚謎)
 The bands carry the fixed series elements, the way 皆謎's sidebar does

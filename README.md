@@ -11,11 +11,13 @@ crafted from. No riddles are stored here; only the elements.
   Inkscape.
   - `backgrounds/` — 16 full-page backgrounds, 1080 × 1920: 8 plain
     (flat solid colour) + 8 patterned (flat solid + tone-on-tone key
-    tessellation, a basketweave of 1×2 rectangles rotated 23.1°).
+    tessellation, Kai's own Figma arrangement — see
+    `elements/figma-pattern-template.svg`).
   - `motifs/` — the key motif behind the patterned backgrounds (bow of
     3 small solid circles, shaft, 2 teeth): `motif-key.svg` (default,
     emerald-deep) plus one tint per background, `motif-key-<name>.svg`,
-    in that background's pattern colour (one shade darker).
+    in that background's pattern colour (only slightly darker/lighter
+    than the fill).
   - `squares/` — empty riddle squares: 9 at 984 × 984, plus the
     full-width 1080 × 1080 plate.
   - `shapes/` — 507 shapes (13 shapes × 13 colours × 3 sizes).
