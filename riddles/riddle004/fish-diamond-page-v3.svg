@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40BD7E"/><stop offset="1" stop-color="#168654"/></linearGradient></defs><rect width="1080" height="1920" fill="url(#bg)"/>
+<g transform="translate(48,468)"><rect x="0" y="0" width="984" height="984" fill="#0E1330" stroke="#FFF6E5" stroke-width="6" stroke-opacity="0.4"/></g>
+<polygon points="540,660 690,810 540,960 390,810" fill="#ED1C24"/>
+<polygon points="690,810 840,960 690,1110 540,960" fill="#FFD200"/>
+<polygon points="540,960 690,1110 540,1260 390,1110" fill="#FFFFFF"/>
+<polygon points="390,810 540,960 390,1110 240,960" fill="#0057A8"/>
+<polygon points="540,660 840,960 540,1260 240,960" fill="none" stroke="#FFFFFF" stroke-width="6"/>
+<text x="540" y="810" text-anchor="middle" dominant-baseline="central" font-family="DejaVu Sans" font-weight="bold" font-size="72" fill="#FFFFFF">1</text>
+<text x="690" y="960" text-anchor="middle" dominant-baseline="central" font-family="DejaVu Sans" font-weight="bold" font-size="72" fill="#000000">2</text>
+<text x="540" y="1110" text-anchor="middle" dominant-baseline="central" font-family="DejaVu Sans" font-weight="bold" font-size="72" fill="#000000">3</text>
+<text x="390" y="960" text-anchor="middle" dominant-baseline="central" font-family="DejaVu Sans" font-weight="bold" font-size="72" fill="#FFFFFF">4</text>
+</svg>

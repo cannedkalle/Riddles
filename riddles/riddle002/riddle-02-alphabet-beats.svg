@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+<style>
+  :root { --bg: #080a1a; --blue: #93c5fd; --grey: #d1d5db; --radius: 18px; }
+  .bg { fill: var(--bg); }
+  .beat { rx: var(--radius); ry: var(--radius); }
+  .letter { fill: var(--blue); }
+  .rest { fill: var(--grey); }
+</style>
+<rect class="bg" width="1080" height="1920"/>
+<g id="beat-grid">
+  <!-- bar 1 -->
+  <rect class="beat letter" x="98" y="76" width="200" height="120"/>
+  <rect class="beat letter" x="326" y="76" width="200" height="120"/>
+  <rect class="beat letter" x="554" y="76" width="200" height="120"/>
+  <rect class="beat letter" x="782" y="76" width="200" height="120"/>
+  <!-- bar 2 -->
+  <rect class="beat letter" x="98" y="214" width="200" height="120"/>
+  <rect class="beat letter" x="326" y="214" width="200" height="120"/>
+  <rect class="beat letter" x="554" y="214" width="200" height="120"/>
+  <rect class="beat rest" x="782" y="214" width="200" height="120"/>
+  <!-- bar 3 -->
+  <rect class="beat letter" x="98" y="378" width="200" height="120"/>
+  <rect class="beat letter" x="326" y="378" width="200" height="120"/>
+  <rect class="beat letter" x="554" y="378" width="200" height="120"/>
+  <rect class="beat letter" x="782" y="378" width="200" height="120"/>
+  <!-- bar 4 -->
+  <rect class="beat letter" x="98" y="516" width="200" height="120"/>
+  <rect class="beat letter" x="326" y="516" width="200" height="120"/>
+  <rect class="beat letter" x="554" y="516" width="200" height="120"/>
+  <rect class="beat letter" x="782" y="516" width="200" height="120"/>
+  <!-- bar 5 -->
+  <rect class="beat letter" x="98" y="680" width="200" height="120"/>
+  <rect class="beat letter" x="326" y="680" width="200" height="120"/>
+  <rect class="beat letter" x="554" y="680" width="200" height="120"/>
+  <rect class="beat letter" x="782" y="680" width="200" height="120"/>
+  <!-- bar 6 -->
+  <rect class="beat letter" x="98" y="818" width="200" height="120"/>
+  <rect class="beat letter" x="326" y="818" width="200" height="120"/>
+  <rect class="beat rest" x="554" y="818" width="200" height="120"/>
+  <rect class="beat rest" x="782" y="818" width="200" height="120"/>
+  <!-- bar 7 -->
+  <rect class="beat letter" x="98" y="982" width="200" height="120"/>
+  <rect class="beat letter" x="326" y="982" width="200" height="120"/>
+  <rect class="beat letter" x="554" y="982" width="200" height="120"/>
+  <rect class="beat rest" x="782" y="982" width="200" height="120"/>
+  <!-- bar 8 -->
+  <rect class="beat letter" x="98" y="1120" width="200" height="120"/>
+  <rect class="beat rest" x="326" y="1120" width="200" height="120"/>
+  <rect class="beat rest" x="554" y="1120" width="200" height="120"/>
+  <rect class="beat rest" x="782" y="1120" width="200" height="120"/>
+  <!-- bar 9 -->
+  <rect class="beat rest" x="98" y="1284" width="200" height="120"/>
+  <rect class="beat rest" x="326" y="1284" width="200" height="120"/>
+  <rect class="beat rest" x="554" y="1284" width="200" height="120"/>
+  <rect class="beat rest" x="782" y="1284" width="200" height="120"/>
+  <!-- bar 10 -->
+  <rect class="beat letter" x="98" y="1422" width="200" height="120"/>
+  <rect class="beat letter" x="326" y="1422" width="200" height="120"/>
+  <rect class="beat letter" x="554" y="1422" width="200" height="120"/>
+  <rect class="beat rest" x="782" y="1422" width="200" height="120"/>
+  <!-- bar 11 -->
+  <rect class="beat rest" x="98" y="1586" width="200" height="120"/>
+  <rect class="beat rest" x="326" y="1586" width="200" height="120"/>
+  <rect class="beat rest" x="554" y="1586" width="200" height="120"/>
+  <rect class="beat rest" x="782" y="1586" width="200" height="120"/>
+  <!-- bar 12 -->
+  <rect class="beat rest" x="98" y="1724" width="200" height="120"/>
+  <rect class="beat rest" x="326" y="1724" width="200" height="120"/>
+  <rect class="beat rest" x="554" y="1724" width="200" height="120"/>
+  <rect class="beat rest" x="782" y="1724" width="200" height="120"/>
+</g>
+</svg>

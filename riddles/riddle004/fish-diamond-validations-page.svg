@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#40BD7E"/><stop offset="1" stop-color="#168654"/></linearGradient></defs><rect width="1080" height="1920" fill="url(#bg)"/>
+<g transform="translate(48,468)"><rect x="0" y="0" width="984" height="984" fill="#0E1330" stroke="#FFF6E5" stroke-width="6" stroke-opacity="0.4"/></g>
+<polygon points="298,528 373,603 298,678 223,603" fill="#ED1C24"/>
+<polygon points="448,678 373,753 298,678 373,603" fill="#FFD200"/>
+<polygon points="298,828 223,753 298,678 373,753" fill="#FFFFFF"/>
+<polygon points="148,678 223,603 298,678 223,753" fill="#0057A8"/>
+<polygon points="298,528 448,678 298,828 148,678" fill="none" stroke="#FFFFFF" stroke-width="3.0"/>
+<text x="298" y="603" text-anchor="middle" dominant-baseline="central" font-family="Liberation Sans" font-weight="bold" font-size="119" fill="#FFFFFF">1</text>
+<text x="373" y="678" text-anchor="middle" dominant-baseline="central" font-family="Liberation Sans" font-weight="bold" font-size="119" fill="#000000">1</text>
+<text x="298" y="753" text-anchor="middle" dominant-baseline="central" font-family="Liberation Sans" font-weight="bold" font-size="119" fill="#000000">1</text>
+<text x="223" y="678" text-anchor="middle" dominant-baseline="central" font-family="Liberation Sans" font-weight="bold" font-size="119" fill="#FFFFFF">1</text>
+<polygon points="782,528 857,603 782,678 707,603" fill="#ED1C24"/>
+<polygon points="932,678 857,753 782,678 857,603" fill="#FFD200"/>
+<polygon points="782,828 707,753 782,678 857,753" fill="#FFFFFF"/>
+<polygon points="632,678 707,603 782,678 707,753" fill="#0057A8"/>
+<polygon points="782,528 932,678 782,828 632,678" fill="none" stroke="#FFFFFF" stroke-width="3.0"/>
+<text x="782" y="603" text-anchor="middle" dominant-baseline="central" font-family="Liberation Sans" font-weight="bold" font-size="119" fill="#FFFFFF">3</text>
+<text x="857" y="678" text-anchor="middle" dominant-baseline="central" font-family="Liberation Sans" font-weight="bold" font-size="119" fill="#000000">2</text>
+<text x="707" y="678" text-anchor="middle" dominant-baseline="central" font-family="Liberation Sans" font-weight="bold" font-size="119" fill="#FFFFFF">5</text>
+<text x="298" y="888" text-anchor="middle" dominant-baseline="central" font-family="Noto Color Emoji" font-size="84">🐟</text>
+<text x="782" y="888" text-anchor="middle" dominant-baseline="central" font-family="Noto Color Emoji" font-size="84">🐜</text>
+<polygon points="540,968 645,1073 540,1178 435,1073" fill="#ED1C24"/>
+<polygon points="750,1178 645,1283 540,1178 645,1073" fill="#FFD200"/>
+<polygon points="540,1388 435,1283 540,1178 645,1283" fill="#FFFFFF"/>
+<polygon points="330,1178 435,1073 540,1178 435,1283" fill="#0057A8"/>
+<polygon points="540,968 750,1178 540,1388 330,1178" fill="none" stroke="#FFFFFF" stroke-width="4.2"/>
+<text x="540" y="1073" text-anchor="middle" dominant-baseline="central" font-family="Liberation Sans" font-weight="bold" font-size="166" fill="#FFFFFF">2</text>
+<text x="645" y="1178" text-anchor="middle" dominant-baseline="central" font-family="Liberation Sans" font-weight="bold" font-size="166" fill="#000000">1</text>
+<text x="540" y="1283" text-anchor="middle" dominant-baseline="central" font-family="Liberation Sans" font-weight="bold" font-size="166" fill="#000000">4</text>
+<text x="435" y="1178" text-anchor="middle" dominant-baseline="central" font-family="Liberation Sans" font-weight="bold" font-size="166" fill="#FFFFFF">2</text>
+<text x="848" y="1178" text-anchor="middle" dominant-baseline="central" font-family="Liberation Sans" font-weight="bold" font-size="140" fill="#FB7185">?</text>
+</svg>
