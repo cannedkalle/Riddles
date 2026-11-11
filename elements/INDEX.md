@@ -132,4 +132,25 @@ alignment), then remove it for the final. Minor lines every 30 px,
 major lines every 90 px (the 12-column grid), riddle-square boundary
 (y 420–1500) emphasized. Emerald-deep `#0D5038`, low opacity.
 
-Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 11 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 210 digits (10 digits × 7 colours × 3 sizes), 3 question indicators, 1 layout grid.
+## Riddle-specific elements (`riddle-specific/riddle004/`)
+
+Content, not layout (Kai, 2026-11-10 — push elements, not the whole
+puzzle). The components of riddle #4, as standalone elements: the
+real NFPA 704 hazard diamond and its specially fonted numbers.
+
+Naming: `hazard-diamond-<size>.svg` — sizes `s` = 120, `m` = 240,
+`l` = 480 (the diagonal). Four quadrants in the real NFPA colours —
+red `#ED1C24` top, yellow `#FFD200` right, white `#FFFFFF` bottom,
+blue `#0057A8` left — white outline, NO numbers. Real objects are
+shown as they are, never recoloured.
+
+Naming: `hazard-number-<d>-<colour>-<size>.svg` — digits 0–9 in
+Liberation Sans Bold outlines (no font needed), white `#FFFFFF`
+(red/blue quadrants) and black `#000000` (yellow/white quadrants),
+sizes `s`/`m`/`l`. The font is what makes them special — the generic
+digits in `digits/` are DejaVu Sans Bold. Sized to the diamond: the
+glyph is 28.28 units tall in the 100 × 100 viewBox (NFPA numeral
+height = 0.40 × placard side = 0.40 / √2 of the diagonal), so a
+number and a diamond at the same size pair at the true proportion.
+
+Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 11 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 210 digits (10 digits × 7 colours × 3 sizes), 3 question indicators, 1 layout grid, 3 hazard diamond, 60 hazard numbers (10 digits × 2 colours × 3 sizes).

@@ -23,6 +23,7 @@ Outputs under ~/workspace/single-image-riddle/elements/:
   digits/       digit-<d>-<colour>-<size>.svg  digits 0-9 as paths, same 3 sizes
   indicators/   question-square-<size>.svg  coral square + white "?", same 3 sizes
   grids/        grid-canvas.svg      1080 x 1920 layout grid (construction aid)
+  riddle-specific/riddle004/  hazard diamond + NFPA numbers (content, not layout)
   INDEX.md      file list + naming convention
 
 Digits are DejaVu Sans Bold glyph outlines rendered as SVG paths (STYLE.md:
@@ -324,6 +325,95 @@ _grid_svg = (
 write(os.path.join(HERE, "grids", "grid-canvas.svg"), _grid_svg)
 counts["grids"] = 1
 
+# ---- riddle-specific elements: riddle004 (FISH diamond) ----
+# Kai, 2026-11-10: push elements, not the whole puzzle — generate content,
+# not layout. So the hazard diamond and its specially fonted numbers are
+# elements (they go on GitHub); the assembled riddle pages are not.
+# The hazard diamond is the real NFPA 704 placard: four quadrants, real
+# colours (red #ED1C24 top, yellow #FFD200 right, white #FFFFFF bottom,
+# blue #0057A8 left), white outline, NO numbers — numbers are separate
+# elements placed in the quadrants. Real objects are shown as they are,
+# never recoloured to fit the palette.
+# The numbers are Liberation Sans Bold outlines (the font the NFPA pages
+# use), NOT the DejaVu digits in digits/ — that is what makes them
+# "specially fonted". They are sized to the diamond: NFPA numeral height
+# is 0.40 x placard side, placard side = diagonal / sqrt(2), so the cap
+# height is 0.40 / sqrt(2) = 0.2828 of the diagonal. In the 100 x 100
+# viewBox the glyph is 28.28 units tall, centred — so a number and a
+# diamond rendered at the same size pair at the true NFPA proportion.
+# Colours: white (#FFFFFF, for the red/blue quadrants) and black (#000000,
+# for the yellow/white quadrants).
+NFPA_QUADS = [
+    ("#ED1C24",),  # red, top
+    ("#FFD200",),  # yellow, right
+    ("#FFFFFF",),  # white, bottom
+    ("#0057A8",),  # blue, left
+]
+
+def hazard_diamond_svg(diag):
+    """NFPA 704 diamond, diagonal = diag, centred in a diag x diag box.
+    Four quadrants + white outline, no numbers."""
+    cx = cy = diag / 2.0
+    h = diag / 2.0
+    verts = [
+        [(cx, cy - h), (cx + h / 2, cy - h / 2), (cx, cy), (cx - h / 2, cy - h / 2)],
+        [(cx + h, cy), (cx + h / 2, cy + h / 2), (cx, cy), (cx + h / 2, cy - h / 2)],
+        [(cx, cy + h), (cx - h / 2, cy + h / 2), (cx, cy), (cx + h / 2, cy + h / 2)],
+        [(cx - h, cy), (cx - h / 2, cy - h / 2), (cx, cy), (cx - h / 2, cy + h / 2)],
+    ]
+    out = []
+    for pts, (fill,) in zip(verts, NFPA_QUADS):
+        points = " ".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+        out.append(f'<polygon points="{points}" fill="{fill}"/>')
+    outline = " ".join(f"{x:.1f},{y:.1f}" for x, y in
+                       [(cx, cy - h), (cx + h, cy), (cx, cy + h), (cx - h, cy)])
+    out.append(f'<polygon points="{outline}" fill="none" stroke="#FFFFFF" '
+               f'stroke-width="{max(2, diag / 100):.1f}"/>')
+    return "".join(out)
+
+os.makedirs(os.path.join(HERE, "riddle-specific", "riddle004"), exist_ok=True)
+n_hazard = 0
+for size, px in SIZES.items():
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{px}" height="{px}" viewBox="0 0 {px} {px}">'
+           + hazard_diamond_svg(px) + '</svg>')
+    write(os.path.join(HERE, "riddle-specific", "riddle004", f"hazard-diamond-{size}.svg"), svg)
+    n_hazard += 1
+counts["hazard_diamond"] = n_hazard
+
+# NFPA numbers: Liberation Sans Bold outlines, 28.28 units tall in the
+# 100 x 100 viewBox (0.40 / sqrt(2) of the diamond diagonal), centred.
+_lib_font = TTFont("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf")
+_lib_glyphset = _lib_font.getGlyphSet()
+
+def nfpa_number_body(glyph_name):
+    """SVG path body for one digit, cap height 28.28 units, centred in the
+    100 box — the NFPA numeral height relative to the diamond diagonal."""
+    glyph = _lib_glyphset[glyph_name]
+    bpen = BoundsPen(_lib_glyphset)
+    glyph.draw(bpen)
+    x0, y0, x1, y1 = bpen.bounds
+    cx, cy, h = (x0 + x1) / 2, (y0 + y1) / 2, y1 - y0
+    k = 28.284 / h
+    spen = SVGPathPen(_lib_glyphset)
+    glyph.draw(spen)
+    d = spen.getCommands()
+    return (f'<path d="{d}" fill="{{c}}" '
+            f'transform="translate(50,50) scale({k:.4f},{-k:.4f}) '
+            f'translate({-cx:.1f},{-cy:.1f})"/>')
+
+NFPA_NUMBER_COLORS = {"white": "#FFFFFF", "black": "#000000"}
+n_nfpa_numbers = 0
+for i, gname in enumerate(DIGIT_NAMES):
+    body = nfpa_number_body(gname)
+    for colour, hexv in NFPA_NUMBER_COLORS.items():
+        for size, px in SIZES.items():
+            svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{px}" height="{px}" viewBox="0 0 100 100">'
+                   + body.format(c=hexv) + '</svg>')
+            write(os.path.join(HERE, "riddle-specific", "riddle004",
+                               f"hazard-number-{i}-{colour}-{size}.svg"), svg)
+            n_nfpa_numbers += 1
+counts["hazard_numbers"] = n_nfpa_numbers
+
 # ---- INDEX.md ----
 lines = ["# Elements — individual SVGs for image editors",
          "",
@@ -420,6 +510,27 @@ lines += ["",
           "major lines every 90 px (the 12-column grid), riddle-square boundary",
           "(y 420–1500) emphasized. Emerald-deep `#0D5038`, low opacity.",
           "",
+          "## Riddle-specific elements (`riddle-specific/riddle004/`)",
+          "",
+          "Content, not layout (Kai, 2026-11-10 — push elements, not the whole",
+          "puzzle). The components of riddle #4, as standalone elements: the",
+          "real NFPA 704 hazard diamond and its specially fonted numbers.",
+          "",
+          "Naming: `hazard-diamond-<size>.svg` — sizes `s` = 120, `m` = 240,",
+          "`l` = 480 (the diagonal). Four quadrants in the real NFPA colours —",
+          "red `#ED1C24` top, yellow `#FFD200` right, white `#FFFFFF` bottom,",
+          "blue `#0057A8` left — white outline, NO numbers. Real objects are",
+          "shown as they are, never recoloured.",
+          "",
+          "Naming: `hazard-number-<d>-<colour>-<size>.svg` — digits 0–9 in",
+          "Liberation Sans Bold outlines (no font needed), white `#FFFFFF`",
+          "(red/blue quadrants) and black `#000000` (yellow/white quadrants),",
+          "sizes `s`/`m`/`l`. The font is what makes them special — the generic",
+          "digits in `digits/` are DejaVu Sans Bold. Sized to the diamond: the",
+          "glyph is 28.28 units tall in the 100 × 100 viewBox (NFPA numeral",
+          "height = 0.40 × placard side = 0.40 / √2 of the diagonal), so a",
+          "number and a diamond at the same size pair at the true proportion.",
+          "",
           f"Counts: {counts['backgrounds']} backgrounds "
           f"({len(BACKGROUNDS)} plain + {len(BACKGROUNDS)} patterned), "
           f"{counts['motifs']} key motifs, "
@@ -429,7 +540,10 @@ lines += ["",
           f"{counts['digits']} digits "
           f"(10 digits × {len(DIGIT_COLORS)} colours × {len(SIZES)} sizes), "
           f"{counts['indicators']} question indicators, "
-          f"{counts['grids']} layout grid.",
+          f"{counts['grids']} layout grid, "
+          f"{counts['hazard_diamond']} hazard diamond, "
+          f"{counts['hazard_numbers']} hazard numbers "
+          f"(10 digits × {len(NFPA_NUMBER_COLORS)} colours × {len(SIZES)} sizes).",
           ""]
 open(os.path.join(HERE, "INDEX.md"), "w").write("\n".join(lines))
 

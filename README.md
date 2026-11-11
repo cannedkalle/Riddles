@@ -29,6 +29,10 @@ crafted from. No riddles are stored here; only the elements.
   - `grids/` — `grid-canvas.svg`, the 1080 × 1920 layout grid. A
     construction aid only: overlay it while building a page (or in an
     editor for manual alignment), then **remove it for the final**.
+  - `riddle-specific/riddle004/` — content, not layout: the real NFPA
+    704 hazard diamond (3 sizes, no numbers) and its specially fonted
+    numbers (Liberation Sans Bold outlines, white/black, 3 sizes, sized
+    to the diamond). The assembled riddle pages are NOT in this repo.
   - `build_elements.py` — the generator. `INDEX.md` — the file list.
 - `STYLE.md` — the style guide: the Flat Dark palette and its colour
   meanings, the frame and the top/bottom band template, the question
