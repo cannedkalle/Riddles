@@ -113,7 +113,9 @@ Naming: `digit-<d>-<colour>-<size>.svg` — sizes `s` = 120, `m` = 240, `l` = 48
 Glyphs are DejaVu Sans Bold outlines as paths (no font needed); each digit
 is 68 units tall in the 100 × 100 viewBox, centred by its bounding box.
 
-Colours: white `#FFFFFF`, black `#000000`, emerald-pale `#E0F8E8`,
+Colours: white `#FFFFFF`, black `#000000`, coral `#FB7185` (answer coral,
+added 2026-11-11 for riddle #001 v10 — numbered markers and numbers),
+emerald-pale `#E0F8E8`,
 emerald-light `#94DEAF`, emerald `#40BD7E`, emerald-dark `#168654`,
 emerald-deep `#0D5038`.
 
@@ -153,4 +155,20 @@ glyph is 28.28 units tall in the 100 × 100 viewBox (NFPA numeral
 height = 0.40 × placard side = 0.40 / √2 of the diagonal), so a
 number and a diamond at the same size pair at the true proportion.
 
-Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 11 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 210 digits (10 digits × 7 colours × 3 sizes), 3 question indicators, 1 layout grid, 3 hazard diamond, 60 hazard numbers (10 digits × 2 colours × 3 sizes).
+## Compound / reusable elements (`compound/`)
+
+Compounds combine several single elements into one reusable unit
+(Kai, 2026-11-11). Each is a single standalone SVG. See
+`compound/README.md` for the full spec of each one.
+
+- `page-frame-standard-A.svg` (1080 × 1920) — the standard riddle
+  page frame as one element, not tied to one riddle: background +
+  riddle square + title + subtitle + riddle title + by CannedKalle
+  + ANSWER label + answer box. Built from Kai's handcrafted
+  `riddle004_standard-2.svg` by removing only the riddle content;
+  the frame is pixel-identical to Kai's standard. The byline sits
+  top-right (moved there in standard-2); the riddle title
+  (`#004 Biohazard`) is the variable part — swap it for the next
+  riddle's `#NNN Name`. The riddle content goes on top of it.
+
+Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 11 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 240 digits (10 digits × 8 colours × 3 sizes), 3 question indicators, 1 layout grid, 3 hazard diamond, 60 hazard numbers (10 digits × 2 colours × 3 sizes), 1 compound page frame (standard-A).
