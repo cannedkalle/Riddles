@@ -7,6 +7,25 @@ designs. Element sizing rule applies: preferred dimensions are multiples
 of 60 px; smaller elements multiples of 20 px; any exception (not a
 multiple of 20 px) needs Kai's approval.
 
+## question-square.svg
+
+The canonical `?` compound (Kai, 2026-11-12): the coral square and the
+white `?` together as one unit. Only use this `?`, in every riddle —
+never construct the `?` from a font or separate parts.
+
+- Source: paths verbatim from Kai's `riddle002_standard.svg`
+  (identical in 003–006). Square: coral `#FB7185`, 120 × 120.
+  `?`: white, bbox-centred in the square (Kai, 2026-11-11).
+  The dot is the rectangular subpath exactly as Kai has it in his
+  files; this supersedes the Nov 11 circle-dot version.
+- Geometry: 100 × 100 viewBox; the artwork is Kai's 120 × 120 region
+  mapped by `translate(-250,-400) scale(0.8333333333)` (translate
+  values are the scaled origin). Render verified pixel-identical to
+  Kai's `?` square (mean diff 0.06, white bbox identical).
+- Size variants with the same artwork: `indicators/question-square-{s,m,l}.svg`
+  (120/240/480 px). The generator's `question_body()` returns this
+  compound verbatim.
+
 ## page-frame-standard-A.svg
 
 The standard riddle page frame as one element — not tied to one riddle.
@@ -46,53 +65,6 @@ square.
 - Text is outlined paths (from Kai's file), so the glyphs and positions
   are exact. To change the riddle title, replace those paths in an
   editor; do not re-typeset the fixed texts.
-
-## info-page.svg
-
-The TikTok carousel info page (Kai, 2026-11-15) — page 2 of every
-post, identical for all riddles. Users who solved the riddle stop
-here; users who want help swipe on to the hint page.
-
-- Source: built from `page-frame-standard-A.svg` by removing the
-  riddle title, ANSWER label, and answer box, then adding live
-  `<text>` (Noto Serif CJK SC Bold for the title slot, Noto Sans
-  for the rest). Frame texts stay Kai's outlined paths.
-- Contents:
-  - Title slot: "Before You Swipe" (serif, emerald `#168654`,
-    left-aligned, same position as riddle titles).
-  - Square: "Solved it? Stop here." / "Need a hint? Swipe →"
-    (Noto Sans Bold, emerald-deep `#0D5038`, centred), then
-    "The last riddle's answer is on the final page." (Noto Sans,
-    sage `#54836B`, smaller, two lines).
-  - The swipe arrow is a drawn path, not a glyph — Noto Sans has
-    no U+2192.
-  - Bottom band: no answer box. "Follow for the next riddle."
-    (Noto Sans, emerald `#168654`, centred).
-- The file is the finished page — post as-is. Built by
-  `tiktok-pages/build_pages.py` (local working copy, not in repo).
-
-## hint-page-template.svg
-
-The TikTok carousel hint page template (Kai, 2026-11-15) — page 3
-of a post. Same template for every riddle; the hint text is
-replaced per riddle.
-
-- Source: built from `page-frame-standard-A.svg` the same way as
-  `info-page.svg` (riddle title, ANSWER label, answer box removed;
-  live `<text>` added).
-- Contents:
-  - Title slot: "#NNN Name" placeholder (serif, emerald `#168654`,
-    left-aligned) — replace with the riddle's number and title.
-  - Square: "HINT" label (serif, emerald `#168654`, same style as
-    the ANSWER label, top-left of the square) + hint text (Noto
-    Sans Bold, emerald-deep `#0D5038`, centred; the template holds
-    the placeholder "Your hint goes here" — replace with 1–3 lines
-    per riddle). No coral `?` square — the `?` stays on the riddle
-    page only.
-  - Bottom band: no answer box. "Answer in the next post."
-    (Noto Sans, emerald `#168654`, centred).
-- Built by `tiktok-pages/build_pages.py` (local working copy, not
-  in repo).
 
 ## info-page.svg
 

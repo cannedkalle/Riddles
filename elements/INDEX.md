@@ -123,8 +123,13 @@ emerald-deep `#0D5038`.
 
 Naming: `question-square-<size>.svg` — sizes `s` = 120, `m` = 240, `l` = 480.
 A coral `#FB7185` square with a white `?` — the standard indicator for
-the thing to answer (Kai, 2026-11-07). The `?` is a DejaVu Sans Bold
-outline (no font needed), 68 units tall in the 100 × 100 viewBox.
+the thing to answer (Kai, 2026-11-07). CANONICAL COMPOUND (Kai,
+2026-11-12): the square and the `?` together as one unit, paths
+verbatim from Kai's `riddle002_standard.svg` (identical in 003–006).
+Only use this — never construct the `?` from a font or separate parts.
+The same artwork is saved as the compound `compound/question-square.svg`.
+The `?` sits bbox-centred in its square (Kai, 2026-11-11); do not
+re-centre it by centroid.
 
 ## Layout grid (`grids/`, transparent background)
 
@@ -171,6 +176,12 @@ Compounds combine several single elements into one reusable unit
   (`#004 Biohazard`) is the variable part — swap it for the next
   riddle's `#NNN Name`. The riddle content goes on top of it.
 
+- `question-square.svg` (100 × 100 viewBox, 120 px) — the canonical
+  `?` compound (Kai, 2026-11-12): coral `#FB7185` square + white `?`
+  as one unit, paths verbatim from Kai's `riddle002_standard.svg`
+  (identical in 003–006). Only use this `?`, in every riddle.
+  Size variants with the same artwork live in `indicators/`.
+
 - `info-page.svg` (1080 × 1920) — the TikTok carousel info page
   (Kai, 2026-11-15), common to all posts: the standard frame with
   title slot "Before You Swipe", square text "Solved it? Stop here."
@@ -185,4 +196,4 @@ Compounds combine several single elements into one reusable unit
   and bottom band "Answer in the next post." (no answer box, no
   coral `?` square).
 
-Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 11 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 240 digits (10 digits × 8 colours × 3 sizes), 3 question indicators, 1 layout grid, 3 hazard diamond, 60 hazard numbers (10 digits × 2 colours × 3 sizes), 3 compound elements (page frame standard-A, info page, hint page template).
+Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 11 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 240 digits (10 digits × 8 colours × 3 sizes), 3 question indicators, 1 layout grid, 3 hazard diamond, 60 hazard numbers (10 digits × 2 colours × 3 sizes), 4 compound elements (page frame standard-A, question square, info page, hint page template).

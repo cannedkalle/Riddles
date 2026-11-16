@@ -265,27 +265,22 @@ for i, gname in enumerate(DIGIT_NAMES):
 counts["digits"] = n_digits
 
 # ---- question indicator: coral square with a white "?" (Kai, 2026-11-07) ----
-# Standard indicator for the thing to answer. The "?" is a DejaVu Sans Bold
-# outline (like the digits — no font dependency), 68 units tall, centred in
-# the 100 box; the coral tile fills the whole 100 x 100.
+# Standard indicator for the thing to answer. The "?" paths are extracted
+# VERBATIM from Kai's handcrafted riddle004_standard-2.svg (Kai,
+# 2026-11-11: "Make the question mark the same as what's on 004") — the
+# hook path is Kai's, mapped from page coords (783,1260)-(903,1380) into
+# the 100 box. The dot is a CIRCLE (Kai, 2026-11-11: the dot is a circle,
+# not a square): the Figma export's rectangular dot subpath was replaced
+# by a circle at the same centre/size. Do NOT regenerate this from a font
+# (DejaVu gives a square dot; Baloo 2 gives a different hook) and do NOT
+# re-centre it: Kai's bbox-centred placement is baked into the transform.
 def question_body():
-    glyph = _glyphset["question"]
-    bpen = BoundsPen(_glyphset)
-    glyph.draw(bpen)
-    x0, y0, x1, y1 = bpen.bounds
-    cx, cy, h = (x0 + x1) / 2, (y0 + y1) / 2, y1 - y0
-    k = 68 / h
-    spen = SVGPathPen(_glyphset)
-    glyph.draw(spen)
-    d = spen.getCommands()
-    # Optical centring (Kai, 2026-11-07: the "?" was not well centred).
-    # Bbox-centring leaves the ink centroid ~7 units high in the 100 box:
-    # the hook carries most of the ink and the dot is small, so the glyph
-    # reads top-heavy. Shift down 7 units so the ink centroid sits at 50.
-    return (f'<rect x="0" y="0" width="100" height="100" fill="{COLORS["coral"]}"/>'
-            f'<path d="{d}" fill="#FFFFFF" '
-            f'transform="translate(50,57) scale({k:.4f},{-k:.4f}) '
-            f'translate({-cx:.1f},{-cy:.1f})"/>')
+    # CANONICAL ? COMPOUND (Kai, 2026-11-12): square + ? together, paths
+    # verbatim from Kai's riddle002_standard.svg (identical in 003-006).
+    # The dot is the rectangular subpath exactly as Kai has it in his
+    # files. Supersedes the Nov 11 circle-dot version. Never regenerate
+    # the ? from a font. Only use this compound.
+    return """<g transform="translate(-250,-400) scale(0.8333333333)"><path d="M420 480H300V600H420V480Z" fill="#FB7185"/><path d="M369.468 555.5H350.103V552.87C350.103 549.94 350.694 547.34 351.874 545.07C353.054 542.79 355.539 539.91 359.33 536.4L362.763 533.29C364.801 531.43 366.294 529.68 367.241 528.03C368.189 526.39 368.663 524.74 368.663 523.1C368.663 520.6 367.805 518.64 366.088 517.23C364.372 515.81 361.976 515.11 358.9 515.11C356.004 515.11 352.875 515.71 349.513 516.9C346.152 518.1 342.648 519.88 339 522.24V505.4C343.327 503.9 347.278 502.79 350.854 502.07C354.43 501.36 357.881 501 361.207 501C369.932 501 376.584 502.78 381.161 506.34C385.738 509.9 388.027 515.09 388.027 521.92C388.027 525.42 387.33 528.56 385.935 531.33C384.54 534.1 382.162 537.08 378.801 540.26L375.368 543.32C372.936 545.54 371.345 547.32 370.594 548.66C369.843 550 369.468 551.48 369.468 553.08V555.5ZM350.103 563.44H369.468V582.53H350.103V563.44Z" fill="#FFFFFF"/></g>"""
 
 _qbody = question_body()
 for size, px in SIZES.items():
