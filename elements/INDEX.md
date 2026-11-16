@@ -171,4 +171,18 @@ Compounds combine several single elements into one reusable unit
   (`#004 Biohazard`) is the variable part — swap it for the next
   riddle's `#NNN Name`. The riddle content goes on top of it.
 
-Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 11 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 240 digits (10 digits × 8 colours × 3 sizes), 3 question indicators, 1 layout grid, 3 hazard diamond, 60 hazard numbers (10 digits × 2 colours × 3 sizes), 1 compound page frame (standard-A).
+- `info-page.svg` (1080 × 1920) — the TikTok carousel info page
+  (Kai, 2026-11-15), common to all posts: the standard frame with
+  title slot "Before You Swipe", square text "Solved it? Stop here."
+  / "Need a hint? Swipe →" / "The last riddle's answer is on the
+  final page.", and bottom band "Follow for the next riddle." (no
+  answer box). The swipe arrow is a drawn path (Noto Sans has no
+  arrow glyph).
+- `hint-page-template.svg` (1080 × 1920) — the TikTok carousel hint
+  page template (Kai, 2026-11-15): the standard frame with title
+  slot "#NNN Name", a "HINT" label in the square (ANSWER-label
+  style), centred hint text (placeholder — replace per riddle),
+  and bottom band "Answer in the next post." (no answer box, no
+  coral `?` square).
+
+Counts: 16 backgrounds (8 plain + 8 patterned), 9 key motifs, 11 full-width riddle square, 507 shapes (13 shapes × 13 colours × 3 sizes), 240 digits (10 digits × 8 colours × 3 sizes), 3 question indicators, 1 layout grid, 3 hazard diamond, 60 hazard numbers (10 digits × 2 colours × 3 sizes), 3 compound elements (page frame standard-A, info page, hint page template).
