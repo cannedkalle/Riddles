@@ -2,7 +2,7 @@
 
 The reusable SVG element library for the single-image riddle series
 (一枚謎, "one-image mystery") — the building blocks Kai's riddles are
-crafted from. No riddles are stored here; only the elements.
+crafted from — plus the finished riddle pages themselves in `riddles/`.
 
 ## What's here
 
@@ -22,18 +22,21 @@ crafted from. No riddles are stored here; only the elements.
     (one per background fill, plus white and a very light emerald
     `#EEFBF3`; the 984 × 984 squares were removed, Kai 2026-11-10).
   - `shapes/` — 507 shapes (13 shapes × 13 colours × 3 sizes).
-  - `digits/` — 210 digits (0–9 × 7 colours × 3 sizes), drawn as
+  - `digits/` — 240 digits (0–9 × 8 colours × 3 sizes), drawn as
     outlines so they need no font.
   - `indicators/` — the coral square + white `?`, the standard
     "answer here" marker, in 3 sizes.
   - `grids/` — `grid-canvas.svg`, the 1080 × 1920 layout grid. A
     construction aid only: overlay it while building a page (or in an
     editor for manual alignment), then **remove it for the final**.
+  - `compound/` — the reusable page compounds: `page-frame-standard-A.svg` (the page frame), `question-square.svg` (coral square + `?`), `info-page.svg` and `hint-page-template.svg` (the TikTok carousel pages). `README.md` documents them.
   - `riddle-specific/riddle004/` — content, not layout: the real NFPA
     704 hazard diamond (3 sizes, no numbers) and its specially fonted
     numbers (Liberation Sans Bold outlines, white/black, 3 sizes, sized
-    to the diamond). The assembled riddle pages are NOT in this repo.
+    to the diamond). The assembled riddle pages live in `riddles/`.
   - `build_elements.py` — the generator. `INDEX.md` — the file list.
+  - `calm-riddle-bach-lofi.wav` — background music (added with riddle014).
+- `riddles/` — the finished riddle pages, `riddle001`–`riddle016`, each with `riddleNNN_standard.svg` + `riddleNNN_standard.png` (the standard page, 1080 × 1920). #001 also has `riddle001_hint.png`.
 - `STYLE.md` — the style guide: the Flat Dark palette and its colour
   meanings, the frame and the top/bottom band template, the question
   indicator, and the layout grid.
